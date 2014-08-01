@@ -9,5 +9,5 @@
  */
 angular.module('wisrNgApp')
   .controller('PublicationCtrl', function ($scope) {
-    debugger;
+    
   });

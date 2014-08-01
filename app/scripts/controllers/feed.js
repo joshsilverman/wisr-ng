@@ -8,7 +8,8 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('FeedCtrl', function ($scope) {
+  .controller('FeedCtrl', function ($scope, Paths) {
+    $scope.assetBasePath = Paths.assets;
     $scope.publications = [
       {  
         id:194438,

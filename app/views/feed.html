@@ -17,7 +17,7 @@
         <div class="answers">
           <div ng-repeat='(id, answerText) in pub._answers' ng-controller='PublicationCtrl' class="answer">
             <span>{{answerText}}</span>
-            <img src="https://wisr-herokuapp-com.global.ssl.fastly.net/assets/ajax-loader.gif"/>
+            <img src="{{assetBasePath}}/ajax-loader.gif"/>
           </div>
           <div ng-controller='AnswerCtrl' class="answer">
             <span>I don't know</span>
