@@ -11,7 +11,7 @@ angular.module('wisrNgApp')
   .controller('FeedCtrl', function ($scope, $routeParams, Publications, Paths) {
     $scope.assetBasePath = Paths.assets;
 
-    Publications.query({subjectURL: $routeParams['subjectURL']}, function(data) {
+    Publications.query({subjectURL: $routeParams.subjectURL}, function(data) {
         $scope.publications = data;
     });
   });
