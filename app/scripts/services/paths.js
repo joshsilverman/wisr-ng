@@ -9,5 +9,6 @@
  */
 angular.module('wisrNgApp')
   .constant('Paths', {
-    'assets': 'https://wisr-herokuapp-com.global.ssl.fastly.net/assets'
+    'assets': 'https://wisr-herokuapp-com.global.ssl.fastly.net/assets',
+    'baseURL': 'https:/www.wisr.com'
   });
