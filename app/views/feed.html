@@ -1,7 +1,7 @@
   <div class='columns'>
     <div class="timeline-container">
       <ul class="timeline">
-        <li ng-repeat='pub in publications' class="feed-publication" style='display:inherit;'>
+        <li ng-repeat='pub in publications' class="feed-publication" style='display:inherit;' ng-controller='PublicationCtrl'>
           <input class="radio" type="radio"></input>
           <div class="relative">
             <span class="timeago"></span>
@@ -16,11 +16,11 @@
               <span>{{pub._question.text}}</span>
             </h3>
             <div class="answers">
-              <div ng-repeat='(id, answerText) in pub._answers' ng-controller='PublicationCtrl' class="answer">
+              <div ng-repeat='(id, answerText) in pub._answers' class="answer"  ng-controller='AnswerCtrl'  ng-click='respondToQuestion()'>
                 <span>{{answerText}}</span>
                 <img src="{{assetBasePath}}/ajax-loader.gif"/>
               </div>
-              <div ng-controller='AnswerCtrl' class="answer">
+              <div class="answer">
                 <span>I don't know</span>
               </div>
             </div>

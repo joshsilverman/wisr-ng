@@ -8,10 +8,10 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('FeedCtrl', function ($scope, $routeParams, Publications, Paths) {
+  .controller('FeedCtrl', function ($scope, $routeParams, PublicationsRsrc, Paths) {
     $scope.assetBasePath = Paths.assets;
 
-    Publications.query({subjectURL: $routeParams.subjectURL}, function(data) {
+    PublicationsRsrc.query({subjectURL: $routeParams.subjectURL}, function(data) {
         $scope.publications = data;
     });
   });
