@@ -9,21 +9,29 @@
  */
 angular.module('wisrNgApp')
   .controller('AnswerCtrl', function ($scope, $location, Auth, CurrentUser) {
+    var currentUser;
+
     var init = function() {
-      CurrentUser;
-      debugger;
-    }
+      CurrentUser(function(_currentUser) {
+        currentUser = _currentUser;
+        console.log(currentUser);
+      });
+    };
 
     $scope.respondToQuestion = function() {
+      var params;
+      
       // if (self.feedPublication.answered() === true) return;
-      // if (!currentUserId) {
+      if (!currentUser) {
         Auth.login();
         return;
-      // }
+      }
+      
+      params = {"asker_id" : $scope.publication.asker_id,
+        "publication_id" : $scope.publication.id,
+        "answer_id" : $scope.id};
 
-      // params = {"asker_id" : askerId,
-      //   "publication_id" : self.publication_id,
-      //   "answer_id" : self.id};
+      console.log(params);
 
       // self.grading(true);
       // $.post('/respond_to_question', params, self.renderResults);};

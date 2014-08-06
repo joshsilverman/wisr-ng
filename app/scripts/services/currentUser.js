@@ -1,21 +1,34 @@
 angular.module('wisrNgApp')
   .factory('CurrentUser', function(Paths, CurrentUserRsrc) {
     var loaded = false,
+      callbacks = [],
+      loading = false,
       currentUser,
       id, email, twi_screen_name;
-    console.log('init currentUser');
 
-    CurrentUserRsrc.get({}, function(data) {
-      if (data.id) {
-        currentUser = {};
+    var get = function() {
+      if (loading) return;
 
-        currentUser.id = data.id;
-        currentUser.email = data.email;
-        currentUser.twi_screen_name = data.twi_screen_name;
-      }
-    })
-
-    return {
-      currentUser: function() { return currentUser; }
+      loading = true;
+      CurrentUserRsrc.get({}, function(data) {
+        currentUser = data;
+        runCallbacks();
+      });
     };
+
+    var runCallbacks = function() {
+        angular.forEach(callbacks, function(callback) {
+          callback(currentUser);
+        });
+    };
+
+    var getOnce = function(callback) {
+      if (currentUser)
+        callback(currentUser);
+      else
+        callbacks.push(callback);
+        get();
+    };
+
+    return getOnce;
   });
