@@ -12,6 +12,7 @@ angular.module('wisrNgApp')
     var init = function() {
       $scope.$on('AnswerCtrl:correct', answered);
       $scope.$on('FeedCtrl:correctQIds:loaded', markPreviouslyAnswered);
+      $scope.correctAId = parseInt($scope.publication._question.correct_answer_id);
     };
 
     var answered = function() {
@@ -20,11 +21,14 @@ angular.module('wisrNgApp')
 
     var markPreviouslyAnswered = function(e, correctQuestions) {
       if (correctQuestions.ids.indexOf($scope.publication.question_id) >= 0) {
-        var correctAId = parseInt($scope.publication._question.correct_answer_id);
         $scope.answered = true;
-        $scope.$broadcast('PublicationCtrl:markPreviouslyAnswered', correctAId);
+        $scope.$broadcast('PublicationCtrl:markPreviouslyAnswered', $scope.correctAId);
       }
     };
+
+    $scope.tellMe = function() {
+      $scope.toldMe = true;
+    }
 
     init();
   });

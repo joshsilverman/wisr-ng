@@ -22,6 +22,7 @@ angular.module('wisrNgApp')
     $scope.respondToQuestion = function() {
       var params;
       if ($scope.$parent.$parent.answered === true) return;
+      if ($scope.$parent.$parent.toldMe === true) return;
 
       if (!currentUser) {
         Auth.login();

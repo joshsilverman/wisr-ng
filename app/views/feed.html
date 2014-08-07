@@ -28,13 +28,17 @@
                 ng-click='respondToQuestion()'
                 ng-class='{correct: correct, 
                   incorrect: correct == false,
-                  grading: grading}'>
+                  grading: grading,
+                  disabled: toldMe && id != correctAId}'>
 
                 <span>{{answerText}}</span>
                 <img src="{{assetBasePath}}/ajax-loader.gif"/>
               </div>
               <div 
-                class="answer">
+                ng-click='tellMe()'
+                class='answer'
+                ng-hide='toldMe'>
+
                 <span>I don't know</span>
               </div>
             </div>
