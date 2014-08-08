@@ -29,7 +29,7 @@
                 ng-class='{correct: correct, 
                   incorrect: correct == false,
                   grading: grading,
-                  disabled: toldMe && id != correctAId}'>
+                  disabled: disabled && id != correctAId}'>
 
                 <span>{{answerText}}</span>
                 <img src="{{assetBasePath}}/ajax-loader.gif"/>
@@ -37,7 +37,7 @@
               <div 
                 ng-click='tellMe()'
                 class='answer'
-                ng-hide='toldMe'>
+                ng-hide='disabled || answered'>
 
                 <span>I don't know</span>
               </div>

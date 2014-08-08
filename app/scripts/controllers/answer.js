@@ -9,7 +9,7 @@
  */
 angular.module('wisrNgApp')
   .controller('AnswerCtrl', function ($scope, $location, Auth, CurrentUser, RespondToQuestionRsrc) {
-    var currentUser;
+    var currentUser, publication;
 
     var init = function() {
       CurrentUser(function(_currentUser) {
@@ -17,12 +17,13 @@ angular.module('wisrNgApp')
       });
 
       $scope.$on('PublicationCtrl:markPreviouslyAnswered', markPreviouslyAnswered);
+      publication = $scope.$parent.$parent;
     };
 
     $scope.respondToQuestion = function() {
       var params;
-      if ($scope.$parent.$parent.answered === true) return;
-      if ($scope.$parent.$parent.toldMe === true) return;
+      if (publication.answered === true) return;
+      if (publication.disabled === true) return;
 
       if (!currentUser) {
         Auth.login();

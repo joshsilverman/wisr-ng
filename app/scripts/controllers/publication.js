@@ -27,7 +27,7 @@ angular.module('wisrNgApp')
     };
 
     $scope.tellMe = function() {
-      $scope.toldMe = true;
+      $scope.disabled = true;
     }
 
     init();
