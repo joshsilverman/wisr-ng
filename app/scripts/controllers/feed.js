@@ -9,10 +9,12 @@
  */
 angular.module('wisrNgApp')
   .controller('FeedCtrl', function ($scope, $routeParams, PublicationsRsrc, Paths, CurrentUser, CorrectQuestionIdsRsrc) {
-    var currentUser, correctQIds;
+    var currentUser, correctQIds, offset, loading;
 
     var init = function() {
       $scope.assetBasePath = Paths.assets;
+      $scope.publications = [];
+      offset = 0;
 
       CurrentUser(function(_currentUser) {
         currentUser = _currentUser;
@@ -22,10 +24,12 @@ angular.module('wisrNgApp')
       loadPublications();
     };
 
-    var loadPublications = function() {
-      PublicationsRsrc.query({subjectURL: $routeParams.subjectURL}, 
+    var loadPublications = function(callback) {
+      loading = true;
+      PublicationsRsrc.query({subjectURL: $routeParams.subjectURL, offset: offset}, 
         function(data) {
-          $scope.publications = data;
+          $scope.publications = $scope.publications.concat(data);
+          loading = false;
       });
     };
 
@@ -36,6 +40,16 @@ angular.module('wisrNgApp')
           $scope.$broadcast('FeedCtrl:correctQIds:loaded', correctQIds);
       });
     }
+
+    $scope.loadMore = function() {
+      if (loading) {
+        console.log('de-dogpile');
+        return;
+      }
+
+      offset += 10;
+      loadPublications();
+    };
 
     init();
   });

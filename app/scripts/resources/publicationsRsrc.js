@@ -1,7 +1,6 @@
 'use strict';
 
-// console.log('publications');
-//Articles service used for articles REST endpoint
+//Publications service used for publications REST endpoint
 angular.module('wisrNgApp').factory('PublicationsRsrc', function($resource, Paths) {
-    return $resource(Paths.apiURL + '/:subjectURL.json', {}, {});
+    return $resource(Paths.apiURL + '/:subjectURL.json?offset=:offset', {}, {});
   });
