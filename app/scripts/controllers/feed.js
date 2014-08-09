@@ -8,8 +8,9 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('FeedCtrl', function ($scope, $routeParams, PublicationsRsrc, Paths, CurrentUser, CorrectQuestionIdsRsrc) {
-    var currentUser, correctQIds, offset, loading;
+  .controller('FeedCtrl', function ($scope, $routeParams, $timeout, PublicationsRsrc, Paths, CurrentUser, CorrectQuestionIdsRsrc) {
+    var currentUser, correctQIds, offset, 
+      loadingPublications, loadingCorrectAIds;
 
     var init = function() {
       $scope.assetBasePath = Paths.assets;
@@ -18,34 +19,40 @@ angular.module('wisrNgApp')
 
       CurrentUser(function(_currentUser) {
         currentUser = _currentUser;
+        loadPublications();
         loadCorrectAnswers();
       });
-
-      loadPublications();
     };
 
     var loadPublications = function(callback) {
-      loading = true;
+      loadingPublications = true;
       PublicationsRsrc.query({subjectURL: $routeParams.subjectURL, offset: offset}, 
         function(data) {
           $scope.publications = $scope.publications.concat(data);
-          loading = false;
+          $timeout(loadCorrectAnswers);
+          loadingPublications = false;
       });
     };
 
     var loadCorrectAnswers = function() {
-      CorrectQuestionIdsRsrc.query({currentUserId: currentUser.id}, 
-        function(_correctQIds) {
-          correctQIds = _correctQIds;
-          $scope.$broadcast('FeedCtrl:correctQIds:loaded', correctQIds);
-      });
-    }
+      var callback = function() {
+        $scope.$broadcast('FeedCtrl:correctQIds:loaded', correctQIds);
+      }
+
+      if (!correctQIds && !loadingCorrectAIds) {
+        loadingCorrectAIds = true;
+        CorrectQuestionIdsRsrc.query({currentUserId: currentUser.id}, 
+          function(_correctQIds) {
+            correctQIds = _correctQIds;
+            callback();
+            loadingCorrectAIds = false;
+        });
+      } else {callback();}
+    };
 
     $scope.loadMore = function() {
-      if (loading) {
-        console.log('de-dogpile');
-        return;
-      }
+      if (loadingPublications) {return;}
+      if ($scope.publications.length == 0) {return;}
 
       offset += 10;
       loadPublications();
