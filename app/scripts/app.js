@@ -19,17 +19,18 @@ angular
     'infinite-scroll',
     'angularMoment'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $locationProvider, $httpProvider) {
+    // $locationProvider.html5Mode(true);
+    $httpProvider.defaults.useXDomain = true;
+    $httpProvider.defaults.withCredentials = true;
+
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
       .when('/:subjectURL', {
         templateUrl: 'views/feed.html',
         controller: 'FeedCtrl'
       })
       .otherwise({
-        redirectTo: '/'
+        templateUrl: 'views/feed.html',
+        controller: 'FeedCtrl'
       });
   });
