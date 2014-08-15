@@ -8,8 +8,8 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('FeedCtrl', function ($scope, $routeParams, $timeout, PublicationsRsrc, Paths, CurrentUser, CorrectQuestionIdsRsrc) {
-    var currentUser, offset, loadingPublications;
+  .controller('FeedCtrl', function ($scope, $routeParams, $timeout, PublicationsRsrc, Paths, CurrentUser, CorrectQuestionIdsRsrc, AskersRsrc) {
+    var currentUser, offset, loadingPublications, askers;
 
     var init = function() {
       $scope.assetBasePath = Paths.assets;
@@ -23,6 +23,13 @@ angular.module('wisrNgApp')
         currentUser = _currentUser;
         loadPublications();
         loadCorrectAnswers();
+      });
+
+      AskersRsrc.query().$promise.then(function(_askers) {
+        askers = _askers;
+        $scope.currentAsker = _.find(askers, function(a) {
+          return a.subject_url == $routeParams.subjectURL;
+        });
       });
     };
 
