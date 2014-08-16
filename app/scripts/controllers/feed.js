@@ -67,13 +67,22 @@ angular.module('wisrNgApp')
         $scope.silhouetteColor = '#292935';
       }
 
+      $scope.imageBaseURL = Paths.imageBaseURL;
+      $scope.questImage = $scope.currentAsker.styles["quest_image"];
       fetchSilhouette();
     }
 
     var fetchSilhouette = function() {
-      $http.get(Paths.imageBaseURL + '/bg_images/nature.svg').success(function(data) {
-        $scope.silhouette = $sce.trustAsHtml(data);
-      })
+      if ($scope.currentAsker)
+        $scope.silhouetteImage = $scope.currentAsker.styles["silhouette_image"];
+      else
+        $scope.silhouetteImage = 'bg_images/nature.svg';
+
+      $http.get(Paths.imageBaseURL + "/" + $scope.silhouetteImage)
+        .success(function(data) {
+          $scope.silhouette = $sce.trustAsHtml(data);
+        }
+      );
     };
 
     $scope.loadMore = function() {
