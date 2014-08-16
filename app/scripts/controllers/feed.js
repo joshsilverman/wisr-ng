@@ -8,7 +8,7 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('FeedCtrl', function ($scope, $routeParams, $timeout, PublicationsRsrc, Paths, CurrentUser, CorrectQuestionIdsRsrc, AskersRsrc) {
+  .controller('FeedCtrl', function ($scope, $routeParams, $timeout, $http, $sce, PublicationsRsrc, Paths, CurrentUser, CorrectQuestionIdsRsrc, AskersRsrc) {
     var currentUser, offset, loadingPublications, askers;
 
     var init = function() {
@@ -30,6 +30,7 @@ angular.module('wisrNgApp')
         $scope.currentAsker = _.find(askers, function(a) {
           return a.subject_url == $routeParams.subjectURL;
         });
+        configStyles();
       });
     };
 
@@ -55,6 +56,25 @@ angular.module('wisrNgApp')
         $scope.$broadcast('FeedCtrl:correctQIds:loaded', $scope.correctQIds);
       });
     }
+
+    var configStyles = function() {
+      if ($scope.currentAsker) {
+        $scope.bgColor = $scope.currentAsker.styles["bg_color"];
+        $scope.silhouetteColor = $scope.currentAsker.styles["silhouette_color"];
+      }
+      else {
+        $scope.bgColor = '#202734';
+        $scope.silhouetteColor = '#292935';
+      }
+
+      fetchSilhouette();
+    }
+
+    var fetchSilhouette = function() {
+      $http.get(Paths.imageBaseURL + '/bg_images/nature.svg').success(function(data) {
+        $scope.silhouette = $sce.trustAsHtml(data);
+      })
+    };
 
     $scope.loadMore = function() {
       if (loadingPublications) {return;}
