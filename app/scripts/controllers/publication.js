@@ -11,7 +11,7 @@ angular.module('wisrNgApp')
   .controller('PublicationCtrl', function ($scope) {
     var init = function() {
       $scope.$on('AnswerCtrl:correct', answered);
-      $scope.$on('FeedCtrl:correctQIds:loaded', markPreviouslyAnswered);
+      $scope.$on('PublicationsCtrl:correctQIds:loaded', markPreviouslyAnswered);
       $scope.correctAId = parseInt($scope.publication._question.correct_answer_id);
     };
 
