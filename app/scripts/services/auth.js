@@ -3,7 +3,7 @@ angular.module('wisrNgApp')
     return {
       logout: function() {  },
       login: function() {
-        location.href = Paths.baseURL + '/users/auth/twitter';
+        location.href = Paths.authBaseURL + '/users/auth/twitter';
       }
     };
   });
