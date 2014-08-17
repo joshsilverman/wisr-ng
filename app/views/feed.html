@@ -9,5 +9,10 @@
     ng-include="'views/_publications.html'"
     class="timeline-container"></div>
 
-  <div class='right-column'></div>
+  <div class='right-column'>
+    <div 
+      ng-controller="StreamCtrl"
+      ng-include="'views/_stream.html'"
+      class="activity-stream"></div>
+  </div>
 </div>

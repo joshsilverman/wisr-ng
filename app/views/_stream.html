@@ -1,0 +1,22 @@
+<h4>Activity</h4>
+<ul>
+  <li 
+    ng-class="{appear: item}"
+    ng-repeat="item in streamItems">
+    <div 
+      class="content" 
+      data-bind="click: goToPub">
+      <img 
+        ng-src="{{item.user.twi_profile_img_url}}"
+        class="rounded profile">
+      <h3>
+        <span style="color: #333;">
+          {{item.user.twi_screen_name}}
+        </span>
+        <span style="color: #666;">answered</span>
+        <span class="timeago" am-time-ago="item.created_at"></span>
+      </h3>
+      <p ng-click="navToURL('{{questionBaseURL}}/{{item.in_reply_to_question.id}}')">{{item.in_reply_to_question.text}}</p>
+    </div>
+  </li>
+</ul>

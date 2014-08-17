@@ -12,5 +12,6 @@ angular.module('wisrNgApp')
     'assets': 'https://wisr-herokuapp-com.global.ssl.fastly.net/assets',
     'imageBaseURL': 'http://dev.localhost/assets',
     'baseURL': 'https:/www.wisr.com',
-    'apiURL': 'http://dev.localhost'
+    'apiURL': 'http://dev.localhost',
+    'legacyURL': 'http://dev.localhost'
   });
