@@ -20,7 +20,11 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- '= render drawer/drawer' -->
+    <div 
+      class="drawer"
+      ng-include="'views/shared/_drawer.html'" 
+      ng-controller="DrawerCtrl"></div>
+
     <div class='main-view' style="background:{{bgColor || 'inherit'}};" ng-view=""></div>
 
     <!-- = yield(:modals) -->
@@ -60,6 +64,7 @@
     <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/angular-moment/angular-moment.js"></script>
+    <script src="bower_components/snapjs/snap.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -72,6 +77,8 @@
         <script src="scripts/controllers/publications.js"></script>
         <script src="scripts/controllers/publication.js"></script>
         <script src="scripts/controllers/answer.js"></script>
+        <script src="scripts/controllers/drawer.js"></script>
+        <script src="scripts/controllers/header.js"></script>
 
         <script src="scripts/resources/publicationsRsrc.js"></script>
         <script src="scripts/resources/askersRsrc.js"></script>
@@ -83,7 +90,8 @@
         <script src="scripts/services/auth.js"></script>
         <script src="scripts/services/currentUser.js"></script>
 
-        <script src="scripts/lib/moment/en.js"></script>        
+        <script src="scripts/lib/moment/en.js"></script>
+        <script src="scripts/directives/wsrsnap.js"></script>
         <!-- endbuild -->
 </body>
 </html>

@@ -1,6 +1,11 @@
-<div class="header" style="background: {{$parent.silhouetteColor}};">
+<div 
+  class="header" 
+  style="background: {{$parent.silhouetteColor}};">
+
   <div class="drawer-toggle">
     <img 
+      wsr-snap
+      ng-click='openDrawer()'
       ng-show='imageBaseURL'
       src="{{imageBaseURL}}/icons/mobile-nav.png">
   </div>

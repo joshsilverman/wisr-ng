@@ -1,5 +1,5 @@
 angular.module('wisrNgApp')
-  .factory('CurrentUser', function(Paths, CurrentUserRsrc) {
+  .factory('CurrentUser', function($timeout, Paths, CurrentUserRsrc) {
     var loaded = false,
       callbacks = [],
       loading = false,
@@ -22,7 +22,7 @@ angular.module('wisrNgApp')
 
     var getOnce = function(callback) {
       if (currentUser)
-        callback(currentUser);
+        $timeout(function() {callback(currentUser)});
       else
         callbacks.push(callback);
         get();
