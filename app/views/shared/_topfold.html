@@ -3,7 +3,9 @@
 </div>
 <div class="topfold">
   <span class="asker-photo">
-    <img src="{{imageBaseURL}}/{{questImage}}">
+    <img 
+      ng-show="$parent.questImage"
+      src="{{imageBaseURL}}/{{questImage}}">
   </span>
   <div class="title">
     <h1>

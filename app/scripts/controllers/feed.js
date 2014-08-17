@@ -58,29 +58,29 @@ angular.module('wisrNgApp')
     }
 
     var configStyles = function() {
-      if ($scope.currentAsker) {
-        $scope.bgColor = $scope.currentAsker.styles["bg_color"];
-        $scope.silhouetteColor = $scope.currentAsker.styles["silhouette_color"];
-      }
-      else {
-        $scope.bgColor = '#202734';
-        $scope.silhouetteColor = '#292935';
-      }
+      fetchSilhouette(function() {
+        if ($scope.currentAsker) {
+          $scope.bgColor = $scope.currentAsker.styles["bg_color"];
+          $scope.silhouetteColor = $scope.currentAsker.styles["silhouette_color"];
+          $scope.questImage = $scope.currentAsker.styles["quest_image"];
+        }
+        $scope.bgColor = $scope.bgColor || '#202734';
+        $scope.silhouetteColor = $scope.silhouetteColor || '#292935';
+        $scope.questImage = $scope.questImage || "quests/scholar.png";
 
-      $scope.imageBaseURL = Paths.imageBaseURL;
-      $scope.questImage = $scope.currentAsker.styles["quest_image"];
-      fetchSilhouette();
+        $scope.imageBaseURL = Paths.imageBaseURL;
+      });
     }
 
-    var fetchSilhouette = function() {
+    var fetchSilhouette = function(callback) {
       if ($scope.currentAsker)
         $scope.silhouetteImage = $scope.currentAsker.styles["silhouette_image"];
-      else
-        $scope.silhouetteImage = 'bg_images/nature.svg';
+      $scope.silhouetteImage = $scope.silhouetteImage || 'bg_images/nature.svg';
 
       $http.get(Paths.imageBaseURL + "/" + $scope.silhouetteImage)
         .success(function(data) {
           $scope.silhouette = $sce.trustAsHtml(data);
+          callback.call();
         }
       );
     };

@@ -21,7 +21,7 @@
     <![endif]-->
 
     <!-- '= render drawer/drawer' -->
-    <div class='main-view' style="background:{{bgColor}};" ng-view=""></div>
+    <div class='main-view' style="background:{{bgColor || 'inherit'}};" ng-view=""></div>
 
     <!-- = yield(:modals) -->
 
