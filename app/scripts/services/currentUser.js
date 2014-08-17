@@ -10,16 +10,14 @@ angular.module('wisrNgApp')
       if (loading) return;
 
       loading = true;
-      CurrentUserRsrc.get({}, function(data) {
-        currentUser = data;
-        runCallbacks();
-      });
+      CurrentUserRsrc.get({}, runCallbacks, runCallbacks);
     };
 
-    var runCallbacks = function() {
-        angular.forEach(callbacks, function(callback) {
-          callback(currentUser);
-        });
+    var runCallbacks = function(data) {
+      currentUser = data;
+      angular.forEach(callbacks, function(callback) {
+        callback(currentUser);
+      });
     };
 
     var getOnce = function(callback) {

@@ -3,11 +3,23 @@
     
   </div>
 
-  <a class="sign-out" data-method="" href="" rel="nofollow">
+  <a 
+    ng-show='$parent.authenticated'
+    class="sign-out" 
+    data-method="" 
+    href="" 
+    rel="nofollow">
+
+    <img 
+      ng-show='imageBaseURL'
+      src="{{imageBaseURL}}/icons/logout.png">
   </a>
   
-  <div class="sign-in">
-    Sign in with Twitter
+  <div 
+    class="sign-in" 
+    ng-show='!$parent.authenticated'>
+
+    <a class="auth_link nav-link" href="#">Sign in with Twitter</a>
   </div>
 
   <div class="logo">

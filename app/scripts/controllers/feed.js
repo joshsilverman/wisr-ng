@@ -9,10 +9,11 @@
  */
 angular.module('wisrNgApp')
   .controller('FeedCtrl', function ($scope, $routeParams, $timeout, $http, $sce, PublicationsRsrc, Paths, CurrentUser, CorrectQuestionIdsRsrc, AskersRsrc) {
-    var currentUser, offset, loadingPublications, askers;
+    var offset, loadingPublications, askers;
 
     var init = function() {
       $scope.assetBasePath = Paths.assets;
+      $scope.imageBaseURL = Paths.imageBaseURL;
       $scope.publications = [];
       offset = 0;
 
@@ -20,7 +21,8 @@ angular.module('wisrNgApp')
       $scope.$watch('publications', broadcastCorrectAnswersLoaded);
 
       CurrentUser(function(_currentUser) {
-        currentUser = _currentUser;
+        $scope.currentUser = _currentUser;
+        $scope.authenticated = $scope.currentUser.id;
         loadPublications();
         loadCorrectAnswers();
       });
@@ -44,7 +46,7 @@ angular.module('wisrNgApp')
     };
 
     var loadCorrectAnswers = function() {
-      CorrectQuestionIdsRsrc.query({currentUserId: currentUser.id}, 
+      CorrectQuestionIdsRsrc.query({currentUserId: $scope.currentUser.id}, 
         function(correctQIds) {
           $scope.correctQIds = correctQIds;
       });
@@ -67,8 +69,6 @@ angular.module('wisrNgApp')
         $scope.bgColor = $scope.bgColor || '#202734';
         $scope.silhouetteColor = $scope.silhouetteColor || '#292935';
         $scope.questImage = $scope.questImage || "quests/scholar.png";
-
-        $scope.imageBaseURL = Paths.imageBaseURL;
       });
     }
 
