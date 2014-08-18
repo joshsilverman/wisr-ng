@@ -5,13 +5,23 @@
  * @name wisrNgApp.paths
  * @description
  * # paths
- * Constant in the wisrNgApp.
+ * Factory in the wisrNgApp.
  */
 angular.module('wisrNgApp')
-  .constant('Paths', {
-    'assets': 'https://wisr-herokuapp-com.global.ssl.fastly.net/assets',
-    'imageBaseURL': 'http://dev.localhost/assets',
-    'authBaseURL': 'https:/www.wisr.com',
-    'apiURL': 'http://dev.localhost',
-    'legacyURL': 'http://dev.localhost'
+  .factory('Paths', function (ENV) {
+    var envDependentPaths = {
+      development: {
+        baseURL: 'http://dev.localhost'
+      },
+      production: {
+        baseURL: 'http://wisr.com'
+      }
+    };
+
+    return { 
+      'assets': 'https://wisr-herokuapp-com.global.ssl.fastly.net/assets',
+      'imageBaseURL': envDependentPaths[ENV.name].baseURL + '/assets',
+      'authBaseURL': 'https:/www.wisr.com',
+      'apiURL': envDependentPaths[ENV.name].baseURL,
+      'legacyURL': envDependentPaths[ENV.name].baseURL };
   });
