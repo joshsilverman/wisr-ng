@@ -27,6 +27,28 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: appConfig,
 
+    ngconstant: {
+      options: {
+        dest: '.tmp/scripts/config.js',
+        name: 'config'
+      },
+
+      development: {
+        constants: {
+          ENV: {
+            name: 'development',
+          }
+        }
+      },
+      production: {
+        constants: {
+          ENV: {
+            name: 'production',
+          }
+        }
+      }
+    },
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
@@ -403,6 +425,7 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
+      'ngconstant:development',
       'watch'
     ]);
   });
@@ -422,6 +445,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'ngconstant:production',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
