@@ -28,6 +28,8 @@ angular.module('wisrNgApp')
     };
 
     var loadCorrectAnswers = function() {
+      if (!$scope.currentUser.id) return;
+      
       CorrectQuestionIdsRsrc.query({currentUserId: $scope.currentUser.id}, 
         function(correctQIds) {
           $scope.correctQIds = correctQIds;
