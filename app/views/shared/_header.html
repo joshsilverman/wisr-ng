@@ -12,9 +12,8 @@
 
   <a 
     ng-show='$parent.authenticated'
-    class="sign-out" 
-    data-method="" 
-    href="" 
+    class="sign-out"
+    ng-href='{{Paths.apiURL}}/users/sign_out'
     rel="nofollow">
 
     <img 

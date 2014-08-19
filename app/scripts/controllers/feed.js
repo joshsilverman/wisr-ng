@@ -14,6 +14,7 @@ angular.module('wisrNgApp')
     var init = function() {
       $scope.assetBasePath = Paths.assets;
       $scope.imageBaseURL = Paths.imageBaseURL;
+      $scope.Paths = Paths;
 
       CurrentUser(function(_currentUser) {
         $scope.currentUser = _currentUser;
