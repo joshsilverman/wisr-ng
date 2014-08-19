@@ -25,7 +25,11 @@
     class="sign-in" 
     ng-show='!$parent.authenticated'>
 
-    <a class="auth_link nav-link" href="#">Sign in with Twitter</a>
+    <a 
+      class="auth_link nav-link" 
+      ng-href='{{Paths.apiURL}}/users/sign_in'>
+
+      Sign in with Twitter</a>
   </div>
 
   <div class="logo">
