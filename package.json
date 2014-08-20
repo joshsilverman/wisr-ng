@@ -34,10 +34,10 @@
     "grunt-karma": "~0.8.3",
     "karma-phantomjs-launcher": "~0.1.4",
     "karma": "~0.12.21",
-    "karma-jasmine": "~0.1.5"
+    "karma-jasmine": "~0.1.5",
+    "connect-modrewrite": "~0.7.7"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "engines": {
     "node": ">=0.10.0"
   },

@@ -21,7 +21,7 @@ angular
     'angularMoment'
   ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
-    // $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.defaults.withCredentials = true;
 
