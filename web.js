@@ -15,4 +15,6 @@ function requireHTTPS(req, res, next) {
 app.use(requireHTTPS);
 
 app.use(gzippo.staticGzip("" + __dirname + "/dist"));
+app.get('/*', function(req, res) { res.render('/'); });
+
 app.listen(process.env.PORT || 5000);
