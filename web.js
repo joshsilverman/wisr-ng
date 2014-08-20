@@ -1,6 +1,7 @@
 var gzippo = require('gzippo');
 var express = require('express');
 var logfmt = require("logfmt");
+var modRewrite = require('connect-modrewrite');
 var app = express();
 
 app.use(logfmt.requestLogger());
@@ -13,8 +14,7 @@ function requireHTTPS(req, res, next) {
 }
 
 app.use(requireHTTPS);
+app.use(modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png$ /index.html [L]']));
 
 app.use(gzippo.staticGzip("" + __dirname + "/dist"));
-app.get('/*', function(req, res) { res.render('/'); });
-
 app.listen(process.env.PORT || 5000);
