@@ -19,8 +19,12 @@ angular.module('wisrNgApp')
     }
 
     var loadPublications = function(callback) {
+      var params = {offset: offset};
+      if ($routeParams.subjectURL)
+        params.subjectURL = $routeParams.subjectURL;
+
       loadingPublications = true;
-      PublicationsRsrc.query({subjectURL: $routeParams.subjectURL, offset: offset}, 
+      PublicationsRsrc.query(params, 
         function(data) {
           $scope.publications = $scope.publications.concat(data);
           loadingPublications = false;
