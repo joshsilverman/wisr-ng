@@ -6,12 +6,8 @@ var app = express();
 app.use(logfmt.requestLogger());
  
 function requireHTTPS(req, res, next) {
-  if (req.header('x-forwarded-proto') != 'https') {
-    console.log(req.header('x-forwarded-proto'));
-    console.log(req.url);   
-    console.log(req.get('host'));
-    
-    return res.redirect('https://' + req.get('host') + req.url);
+  if (req.header('x-forwarded-proto') != 'https') {    
+    return res.redirect(301, 'https://' + req.get('host') + req.url);
   }
   next();
 }
