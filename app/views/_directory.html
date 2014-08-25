@@ -1,0 +1,17 @@
+<div class="directory">
+  <h4>All subjects</h4>
+  <ul>
+    <a
+      ng-repeat='asker in askers' 
+      href="{{asker.subject_url}}">
+      <li class="appear">
+        <div class="content">
+          <img class="rounded profile" src="{{asker.twi_profile_img_url}}"/>
+          <h3>{{asker.subject}}</h3>
+          <p>{{asker.description}}</p>
+          <div class="clearfix"></div>
+        </div>
+      </li>
+    </a>
+  </ul>
+</div>

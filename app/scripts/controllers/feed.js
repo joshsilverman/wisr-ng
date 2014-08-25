@@ -9,7 +9,7 @@
  */
 angular.module('wisrNgApp')
   .controller('FeedCtrl', function($scope, $routeParams, $http, $sce, Paths, CurrentUser, AskersRsrc) {
-    var offset, loadingPublications, askers;
+    var offset, loadingPublications;
 
     var init = function() {
       $scope.assetBasePath = Paths.assets;
@@ -23,8 +23,8 @@ angular.module('wisrNgApp')
       });
 
       AskersRsrc.query().$promise.then(function(_askers) {
-        askers = _askers;
-        $scope.currentAsker = _.find(askers, function(a) {
+        $scope.askers = _askers;
+        $scope.currentAsker = _.find($scope.askers, function(a) {
           return a.subject_url == $routeParams.subjectURL;
         });
         configStyles();
