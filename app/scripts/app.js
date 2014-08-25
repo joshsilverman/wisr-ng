@@ -26,6 +26,10 @@ angular
     $httpProvider.defaults.withCredentials = true;
 
     $routeProvider
+      .when('/', {
+        templateUrl: 'views/feed_index.html',
+        controller: 'FeedCtrl'
+      })
       .when('/:subjectURL', {
         templateUrl: 'views/feed.html',
         controller: 'FeedCtrl'

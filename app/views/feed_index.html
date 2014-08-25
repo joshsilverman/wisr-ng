@@ -1,0 +1,30 @@
+<div 
+  ng-controller='HeaderCtrl'
+  ng-include="'views/shared/_header.html'"></div>
+
+<div class="starscape">
+  <div class="galaxy" data-stellar-ratio=".32"></div>
+  <div class="stars" data-stellar-ratio=".36"></div>
+  <div class="smallplanets" data-stellar-ratio=".44"></div>
+  <h1 class="headline" data-stellar-ratio=".6">
+    <span class="logo">Wisr - Daily Quiz Questions</span>
+  </h1>
+  <div class="planet" data-stellar-ratio="1"></div>
+  <div class="quest" data-stellar-ratio="1.02"></div>
+</div>
+
+<div class='columns home' ng-controller='PublicationsCtrl'>
+  <div 
+    ng-include="'views/_publications.html'"
+    class="timeline-container"></div>
+
+  <div class='right-column'>
+    <div 
+      ng-controller="StreamCtrl"
+      ng-include="'views/_stream.html'"
+      class="activity-stream"></div>
+    <a class="mixpanel_badge visible-desktop" href="https://mixpanel.com/f/partner">
+      <img alt="Mobile Analytics" src="//cdn.mxpnl.com/site_media/images/partner/badge_light.png"/>
+    </a>
+  </div>
+</div>
