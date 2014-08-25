@@ -22,6 +22,8 @@ angular.module('wisrNgApp')
       var params = {offset: offset};
       if ($routeParams.subjectURL)
         params.subjectURL = $routeParams.subjectURL;
+      else
+        $scope.index = true;
 
       loadingPublications = true;
       PublicationsRsrc.query(params, 
