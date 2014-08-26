@@ -14,7 +14,8 @@
     "angular-route": "1.2.16",
     "ngInfiniteScroll": "1.1.2",
     "angular-moment": "0.8.0",
-    "snapjs": "1.9.3"
+    "snapjs": "1.9.3",
+    "jquery.stellar": "0.6.2"
   },
   "devDependencies": {
     "angular-mocks": "1.2.16",
