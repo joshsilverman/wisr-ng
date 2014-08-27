@@ -1,38 +1,33 @@
-<div 
-  class="header" 
-  style="background: {{$parent.silhouetteColor}};">
+<div class="drawer-toggle">
+  <img 
+    wsr-snap
+    ng-click='openDrawer()'
+    ng-show='imageBaseURL'
+    src="{{imageBaseURL}}/icons/mobile-nav.png">
+</div>
 
-  <div class="drawer-toggle">
-    <img 
-      wsr-snap
-      ng-click='openDrawer()'
-      ng-show='imageBaseURL'
-      src="{{imageBaseURL}}/icons/mobile-nav.png">
-  </div>
+<a 
+  ng-show='$parent.authenticated'
+  class="sign-out"
+  ng-href='{{Paths.apiURL}}/users/sign_out'
+  rel="nofollow">
+
+  <img 
+    ng-show='imageBaseURL'
+    src="{{imageBaseURL}}/icons/logout.png">
+</a>
+
+<div 
+  class="sign-in" 
+  ng-show='!$parent.authenticated'>
 
   <a 
-    ng-show='$parent.authenticated'
-    class="sign-out"
-    ng-href='{{Paths.apiURL}}/users/sign_out'
-    rel="nofollow">
+    class="auth_link nav-link" 
+    ng-href='{{Paths.apiURL}}/users/sign_in'>
 
-    <img 
-      ng-show='imageBaseURL'
-      src="{{imageBaseURL}}/icons/logout.png">
-  </a>
-  
-  <div 
-    class="sign-in" 
-    ng-show='!$parent.authenticated'>
+    Sign in with Twitter</a>
+</div>
 
-    <a 
-      class="auth_link nav-link" 
-      ng-href='{{Paths.apiURL}}/users/sign_in'>
-
-      Sign in with Twitter</a>
-  </div>
-
-  <div class="logo">
-    <a href="/">Wisr</a>
-  </div>
+<div class="logo">
+  <a href="/">Wisr</a>
 </div>
