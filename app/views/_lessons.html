@@ -6,8 +6,8 @@
       <span>{{$index + 1}}</span>
 
       <span class='completeness'>
-        <span>{{answered_count}}</span>
-        <span ng-show='answered_count'> / </span>
+        <span>{{lessonCounts[lesson.id]}}</span>
+        <span ng-show='lessonCounts[lesson.id]'> / </span>
         <span>{{lesson._question_count}}</span>
       </span>
 
