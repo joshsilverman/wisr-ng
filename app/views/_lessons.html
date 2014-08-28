@@ -1,0 +1,16 @@
+<h4>Quizzes</h4>
+
+<ul>
+  <li class='appear' ng-repeat='lesson in lessons'>
+    <div class='content' ng-href='/{{subject_url}}/{{lesson.topic_url}}/quiz'>
+      <span>{{$index + 1}}</span>
+
+      <span class='completeness'>
+        <span>{{answered_count}}</span>
+        <span ng-show='answered_count'> / </span>
+        <span>{{lesson._question_count}}</span>
+      </span>
+
+      <p>{{lesson.name}}</p>
+    </div>
+  </li>
