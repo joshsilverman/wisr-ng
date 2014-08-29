@@ -27,6 +27,8 @@ angular.module('wisrNgApp')
         $scope.currentAsker = _.find($scope.askers, function(a) {
           return a.subject_url == $routeParams.subjectURL;
         });
+        $scope.$broadcast('FeedCtrl::fetchedCurrentAsker', $scope.currentAsker);
+        
         configStyles();
       });
     };
