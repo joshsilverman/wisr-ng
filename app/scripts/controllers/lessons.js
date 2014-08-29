@@ -8,7 +8,7 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('LessonsCtrl', function ($scope, $rootScope, LessonsRsrc, LessonAnswerCountsRsrc) {
+  .controller('LessonsCtrl', function ($scope, $rootScope, Paths, LessonsRsrc, LessonAnswerCountsRsrc) {
     var init = function() {
       LessonsRsrc.get({asker_id: 13588}, function(data) {
         $scope.lessons = data.topics;
@@ -24,6 +24,11 @@ angular.module('wisrNgApp')
         $scope.lessonCounts = data;
       });
     }
+
+    $scope.navToLesson = function(subject_url, topic_url) {
+      var url = [Paths.legacyURL, '/', subject_url, '/', topic_url, '/quiz'];
+      window.location.href = url.join('');
+    };
 
     init();
   });

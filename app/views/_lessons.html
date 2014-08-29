@@ -2,7 +2,7 @@
 
 <ul>
   <li class='appear' ng-repeat='lesson in lessons'>
-    <div class='content' ng-href='/{{subject_url}}/{{lesson.topic_url}}/quiz'>
+    <div class='content' ng-click='navToLesson(subject_url, lesson.topic_url)'>
       <span>{{$index + 1}}</span>
 
       <span class='completeness'>
