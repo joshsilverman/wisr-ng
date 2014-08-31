@@ -25,7 +25,7 @@ angular.module('wisrNgApp')
       if (publication.answered === true) return;
       if (publication.disabled === true) return;
 
-      if (!currentUser) {
+      if (!currentUser.id) {
         Auth.login();
         return;
       }
