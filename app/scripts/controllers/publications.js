@@ -26,7 +26,7 @@ angular.module('wisrNgApp')
         $scope.index = true;
 
       loadingPublications = true;
-      PublicationsRsrc.query(params, 
+      PublicationsRsrc.query(params,
         function(data) {
           $scope.publications = $scope.publications.concat(data);
           loadingPublications = false;
@@ -35,8 +35,8 @@ angular.module('wisrNgApp')
 
     var loadCorrectAnswers = function() {
       if (!$scope.currentUser.id) return;
-      
-      CorrectQuestionIdsRsrc.query({currentUserId: $scope.currentUser.id}, 
+
+      CorrectQuestionIdsRsrc.query({currentUserId: $scope.currentUser.id},
         function(correctQIds) {
           $scope.correctQIds = correctQIds;
       });
@@ -47,7 +47,7 @@ angular.module('wisrNgApp')
       $timeout(function() {
         $scope.$broadcast('PublicationsCtrl:correctQIds:loaded', $scope.correctQIds);
       });
-    }
+    };
 
     $scope.loadMore = function() {
       if (loadingPublications) {return;}
