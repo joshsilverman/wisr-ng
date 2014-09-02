@@ -1,25 +1,25 @@
-<div 
-  class="header" 
+<div
+  class="header"
   style="background: {{$parent.silhouetteColor}};"
   ng-controller='HeaderCtrl'
   ng-include="'views/shared/_header.html'"></div>
 
 <div ng-include="'views/shared/_topfold.html'"></div>
 
-<div 
-  class='columns' 
+<div
+  class='columns'
   ng-controller='PublicationsCtrl'
   ng-show='publications.length'>
-  <div 
+  <div
     ng-include="'views/_publications.html'"
     class="timeline-container"></div>
 
   <div class='right-column'>
-    <div 
+    <div
       ng-controller="StreamCtrl"
       ng-include="'views/_stream.html'"
       class="activity-stream"></div>
-    <div 
+    <div
       ng-controller="LessonsCtrl"
       ng-include="'views/_lessons.html'"
       class="lessons"

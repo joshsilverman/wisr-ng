@@ -20,12 +20,20 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div 
+    <div
       class="drawer"
-      ng-include="'views/shared/_drawer.html'" 
+      ng-include="'views/shared/_drawer.html'"
       ng-controller="DrawerCtrl"></div>
 
-    <div class='main-view' style="background:{{bgColor || 'inherit'}};" ng-view=""></div>
+    <div
+      class='main-view'
+      style="background:{{bgColor || 'inherit'}};"
+      ng-class="{blur: blurRootContainer}"
+      ng-view=""></div>
+      
+    <div
+      ng-controller="AuthorQuestionModalCtrl"
+      ng-include="'views/_author_question_modal.html'"></div>
 
     <!-- = yield(:modals) -->
 
@@ -80,6 +88,7 @@
         <script src="scripts/controllers/drawer.js"></script>
         <script src="scripts/controllers/header.js"></script>
         <script src="scripts/controllers/stream.js"></script>
+        <script src="scripts/controllers/author_question_modal.js"></script>
 
         <script src="scripts/resources/publicationsRsrc.js"></script>
         <script src="scripts/resources/askersRsrc.js"></script>

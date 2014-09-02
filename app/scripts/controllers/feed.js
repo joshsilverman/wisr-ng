@@ -8,7 +8,7 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('FeedCtrl', function($scope, $routeParams, $http, $sce, Paths, CurrentUser, AskersRsrc) {
+  .controller('FeedCtrl', function($scope, $routeParams, $http, $sce, $rootScope, Paths, CurrentUser, AskersRsrc) {
     var offset, loadingPublications;
 
     var init = function() {
@@ -27,10 +27,14 @@ angular.module('wisrNgApp')
         $scope.currentAsker = _.find($scope.askers, function(a) {
           return a.subject_url == $routeParams.subjectURL;
         });
+
+        $scope.$emit('FeedCtrl::fetchedCurrentAsker', $scope.currentAsker);
         $scope.$broadcast('FeedCtrl::fetchedCurrentAsker', $scope.currentAsker);
-        
+
         configStyles();
       });
+
+      $rootScope.$on('AuthorQuestionModalCtrl:showAuthorQuestionModal', blurContainer);
     };
 
     var configStyles = function() {
@@ -57,6 +61,10 @@ angular.module('wisrNgApp')
           callback.call();
         }
       );
+    };
+
+    var blurContainer = function() {
+      $scope.blurRootContainer = true;
     };
 
     init();
