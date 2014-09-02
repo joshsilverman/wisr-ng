@@ -6,7 +6,7 @@
     </h3>
   </div>
   <div class="modal-body">
-    <div class="question_form">
+    <div class="question_form" ng-hide='submitted'>
       <h3>
         <i class="icon-question-sign"></i>
         Question
@@ -60,17 +60,16 @@
         Add answer
       </a>
     </div>
-    <div class="message hide">
+    <div class="message" ng-show='submitted'>
       Your question was submitted, we'll get in touch when its posted!
-      <a class="post_another">Write another ></a>
+      <a class="post_another" ng-click='postAnother()' href='#'>Write another.</a>
     </div>
   </div>
-  <div class="modal-footer">
+  <div class="modal-footer" ng-hide='submitted'>
     <a class="btn cancel" data-dismiss="modal" href="#">Cancel</a>
     <a
       ng-click="submit()"
       class="btn btn-primary"
-      data-loading-text="Loading..."
       href="#"
       id="submit_question">Submit Question</a>
   </div>

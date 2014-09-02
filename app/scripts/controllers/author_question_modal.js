@@ -8,7 +8,7 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('AuthorQuestionModalCtrl', function ($scope, $rootScope, $location, $timeout) {
+  .controller('AuthorQuestionModalCtrl', function ($scope, $rootScope, $location, $timeout, $http, Paths) {
     function init() {
       $rootScope.$on('FeedCtrl::fetchedCurrentAsker', registerCurrentAsker);
       if ($location.search().q) showModal();
@@ -49,7 +49,7 @@ angular.module('wisrNgApp')
     $scope.submit = function() {
       if (!valid()) return;
 
-      var flatData = {
+      var data = {
         "question" : $scope.question.text,
         "asker_id" : $scope.currentAsker.id,
         "canswer"  : $scope.question.correctAnswer,
@@ -58,20 +58,24 @@ angular.module('wisrNgApp')
         "ianswer3" : $scope.question.incorrectAnswers[2] || '',
       };
 
-      // $http.post("/questions/save_question_and_answers",
-      //   type: "POST",
-      //   data: data,
-      //   error: => alert "Sorry, something went wrong!",
-      //   success: (e) =>
-      //     $("#question_input, #canswer input, #ianswer1 input, #ianswer2 input, #ianswer3 input").val("")
-      //     if post_id
-      //       window.feed.post_another()
-      //       modal.modal('hide')
-      //       $(".post[post_id=#{post_id}]").parent().css("opacity", 0.8)
-      //     else
-      //       modal.find(".question_form").hide()
-      //       modal.find(".message").show()
-      //       modal.find(".modal-body").slideToggle(250)
+      var url = Paths.legacyURL + "/questions/save_question_and_answers";
+      $http.defaults.useXDomain = true;
+      $http.defaults.withCredentials = true;
+      $scope.submitted = true;
+
+      $http.post(url, data)
+        .success(function(e) {
+        });
+    }
+
+    $scope.postAnother = function() {
+      $scope.question.text = '';
+      $scope.question.correctAnswer = '';
+      $scope.question.incorrectAnswers[0] = '';
+      delete $scope.question.incorrectAnswers[1];
+      delete $scope.question.incorrectAnswers[2];
+
+      $scope.submitted = false;
     }
 
     function valid() {
