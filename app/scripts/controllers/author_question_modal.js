@@ -8,10 +8,19 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('AuthorQuestionModalCtrl', function ($scope, $rootScope, $location, $timeout, $http, Paths) {
+  .controller('AuthorQuestionModalCtrl', function ($scope, $rootScope, $location, $timeout, $http, Paths, CurrentUser) {
+    var currentUser;
+
     function init() {
       $rootScope.$on('FeedCtrl::fetchedCurrentAsker', registerCurrentAsker);
-      if ($location.search().q) showModal();
+      if (!$location.search().q) return;
+
+      CurrentUser(function(_currentUser) {
+        currentUser = _currentUser;
+        if (!currentUser.id) return;
+        
+        showModal();
+      });
 
       $scope.incorrectAnswerCount = 1;
       $scope.question = {
