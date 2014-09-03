@@ -9,7 +9,7 @@
  */
 angular.module('wisrNgApp')
   .controller('AuthorQuestionModalCtrl', function ($scope, $rootScope, $location, $timeout, $http, Paths, CurrentUser) {
-    var currentUser;
+    var currentUser, modal;
 
     function init() {
       $rootScope.$on('FeedCtrl::fetchedCurrentAsker', registerCurrentAsker);
@@ -18,7 +18,7 @@ angular.module('wisrNgApp')
       CurrentUser(function(_currentUser) {
         currentUser = _currentUser;
         if (!currentUser.id) return;
-        
+
         showModal();
       });
 
@@ -30,7 +30,7 @@ angular.module('wisrNgApp')
     }
 
     function getModal(callback) {
-      var modal = $('#post_question_modal');
+      modal = $('#post_question_modal');
       if (modal.length)
         callback(modal);
       else
@@ -75,6 +75,11 @@ angular.module('wisrNgApp')
       $http.post(url, data)
         .success(function(e) {
         });
+    }
+
+    $scope.close = function() {
+      modal.modal('hide');
+      $scope.$emit('AuthorQuestionModalCtrl:hideAuthorQuestionModal');
     }
 
     $scope.postAnother = function() {
