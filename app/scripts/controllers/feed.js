@@ -15,6 +15,7 @@ angular.module('wisrNgApp')
       $scope.assetBasePath = Paths.assets;
       $scope.imageBaseURL = Paths.imageBaseURL;
       $scope.Paths = Paths;
+      $rootScope.title = "Daily Quiz Questions | Wisr";
 
       CurrentUser(function(_currentUser) {
         $scope.currentUser = _currentUser;
@@ -49,6 +50,9 @@ angular.module('wisrNgApp')
         $scope.silhouetteColor = $scope.silhouetteColor || '#292935';
         $scope.questImage = $scope.questImage || "quests/scholar.png";
       });
+
+      if ($scope.currentAsker)
+        $rootScope.title = ["Daily ", $scope.currentAsker.subject, " Quiz | Wisr"].join("");
     }
 
     var fetchSilhouette = function(callback) {
