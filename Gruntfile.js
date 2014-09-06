@@ -42,6 +42,13 @@ module.exports = function (grunt) {
           }
         }
       },
+      test: {
+        constants: {
+          ENV: {
+            name: 'development',
+          }
+        }
+      },
       production: {
         constants: {
           ENV: {
@@ -440,6 +447,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
+    'ngconstant:test',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
