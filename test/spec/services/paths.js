@@ -11,8 +11,8 @@ describe('Service: paths', function () {
     paths = _paths_;
   }));
 
-  it('should do something', function () {
-    expect(!!paths).toBe(true);
-  });
+  // it('should do something', function () {
+  //   expect(!!paths).toBe(true);
+  // });
 
 });
