@@ -35,7 +35,8 @@
     "karma-phantomjs-launcher": "~0.1.4",
     "karma": "~0.12.21",
     "karma-jasmine": "~0.1.5",
-    "connect-modrewrite": "~0.7.7"
+    "connect-modrewrite": "~0.7.7",
+    "bower": "1.3.9"
   },
   "devDependencies": {},
   "engines": {
