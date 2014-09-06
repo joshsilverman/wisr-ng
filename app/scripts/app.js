@@ -27,15 +27,19 @@ angular
 
     $routeProvider
       .when('/', {
-        templateUrl: 'views/feed_index.html',
+        templateUrl: '/views/feed_index.html',
         controller: 'FeedCtrl'
       })
       .when('/:subjectURL', {
-        templateUrl: 'views/feed.html',
+        templateUrl: '/views/feed.html',
+        controller: 'FeedCtrl'
+      })
+      .when('/:subjectURL/:publicationId', {
+        templateUrl: '/views/feed.html',
         controller: 'FeedCtrl'
       })
       .otherwise({
-        templateUrl: 'views/feed.html',
+        templateUrl: '/views/feed.html',
         controller: 'FeedCtrl'
       });
   });

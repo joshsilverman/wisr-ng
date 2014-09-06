@@ -1,28 +1,28 @@
 <div class="drawer-toggle">
-  <img 
+  <img
     wsr-snap
     ng-click='openDrawer()'
     ng-show='imageBaseURL'
     src="{{imageBaseURL}}/icons/mobile-nav.png">
 </div>
 
-<a 
+<a
   ng-show='$parent.authenticated'
   class="sign-out"
   ng-href='{{Paths.apiURL}}/users/sign_out'
   rel="nofollow">
 
-  <img 
+  <img
     ng-show='imageBaseURL'
     src="{{imageBaseURL}}/icons/logout.png">
 </a>
 
-<div 
-  class="sign-in" 
+<div
+  class="sign-in"
   ng-show='!$parent.authenticated'>
 
-  <a 
-    class="auth_link nav-link" 
+  <a
+    class="auth_link nav-link"
     ng-href='{{Paths.apiURL}}/users/sign_in'>
     Sign in</a>
 </div>
