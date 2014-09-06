@@ -3,14 +3,18 @@
 // author : Jonathan Abourbih : https://github.com/jonbca
 
 (function (factory) {
-    if (typeof define === 'function' && define.amd) {
-        define(['moment'], factory); // AMD
-    } else if (typeof exports === 'object') {
-        module.exports = factory(require('../moment')); // Node
-    } else {
-        factory(window.moment); // Browser global
-    }
+    if (!window.moment) return;
+    
+    factory(window.moment); // Browser global
+
+    // if (typeof define === 'function' && define.amd) {
+    //     define(['moment'], factory); // AMD
+    // } else if (typeof exports === 'object') {
+    //     module.exports = factory(require('../moment')); // Node
+    // } else {
+    // }
 }(function (moment) {
+
     return moment.lang('en-ca', {
         months : "January_February_March_April_May_June_July_August_September_October_November_December".split("_"),
         monthsShort : "Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec".split("_"),
