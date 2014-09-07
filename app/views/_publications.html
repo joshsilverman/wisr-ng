@@ -1,16 +1,26 @@
 <ul class="timeline">
-  <li 
-    ng-repeat='publication in publications' 
-    class="feed-publication" 
-    style='display:inherit;' 
+  <li
+    ng-repeat='publication in publications'
+    class="feed-publication"
+    style='display:inherit;'
     ng-controller='PublicationCtrl'>
 
-    <input class="radio" type="radio"></input>
-    <div class="relative">
+    <input
+      ng-if="publication.id != inFocusPublication.id"
+      class="radio"
+      type="radio"></input>
+
+    <div
+      class="relative"
+      ng-hide="publication.id == inFocusPublication.id">
+
       <span class="timeago" am-time-ago="publication.first_posted_at"></span>
       <span class="circle"></span>
     </div>
-    <div class="content">
+    <div
+      class="content"
+      ng-class="{active: publication.id == inFocusPublication.id}">
+
       <h3>
         <span class="subject-label" ng-class="{visible: index}">
           <a ng-href="/{{publication._asker.subject_url}}">{{publication._asker.subject}}</a>
@@ -19,12 +29,12 @@
         <span>{{publication._question.text}}</span>
       </h3>
       <div class="answers">
-        <div 
-          ng-repeat='(id, answerText) in publication._answers' 
-          class="answer"  
-          ng-controller='AnswerCtrl' 
+        <div
+          ng-repeat='(id, answerText) in publication._answers'
+          class="answer"
+          ng-controller='AnswerCtrl'
           ng-click='respondToQuestion()'
-          ng-class='{correct: correct, 
+          ng-class='{correct: correct,
             incorrect: correct == false,
             grading: grading,
             disabled: disabled && id != correctAId}'>
@@ -32,7 +42,7 @@
           <span>{{answerText}}</span>
           <img ng-src="{{$parent.assetBasePath}}/ajax-loader.gif"/>
         </div>
-        <div 
+        <div
           ng-click='tellMe()'
           class='answer'
           ng-hide='disabled || answered'>
@@ -41,14 +51,14 @@
         </div>
       </div>
       <h4 class="hidden phone-variant-hide">
-        Take the full 
+        Take the full
         <a></a>
       </h4>
     </div>
   </li>
   <div class="load-more">
     <div class="phone-variant-hide">
-      
+
     </div>
   </div>
 </ul>

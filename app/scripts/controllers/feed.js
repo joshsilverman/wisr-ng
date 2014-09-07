@@ -8,7 +8,7 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('FeedCtrl', function($scope, $routeParams, $http, $sce, $rootScope, Paths, CurrentUser, AskersRsrc) {
+  .controller('FeedCtrl', function($scope, $routeParams, $http, $sce, $rootScope, Paths, CurrentUser, AskersRsrc, PublicationRsrc) {
     var offset, loadingPublications;
 
     var init = function() {
@@ -16,6 +16,8 @@ angular.module('wisrNgApp')
       $scope.imageBaseURL = Paths.imageBaseURL;
       $scope.Paths = Paths;
       $rootScope.title = "Daily Quiz Questions | Wisr";
+
+      loadInFocusPublication();
 
       CurrentUser(function(_currentUser) {
         $scope.currentUser = _currentUser;
@@ -39,7 +41,15 @@ angular.module('wisrNgApp')
       $rootScope.$on('AuthorQuestionModalCtrl:hideAuthorQuestionModal', function() {blurContainer(false)});
     };
 
-    var configStyles = function() {
+    function loadInFocusPublication() {
+      if (!$routeParams.publicationId) return;
+
+      PublicationRsrc.get({id: $routeParams.publicationId}).$promise.then(function(rsrc) {
+        $scope.$broadcast('FeedCtrl:inFocusPublicationLoaded', rsrc);
+      });
+    }
+
+    function configStyles() {
       fetchSilhouette(function() {
         if ($scope.currentAsker) {
           $scope.bgColor = $scope.currentAsker.styles["bg_color"];
@@ -55,7 +65,7 @@ angular.module('wisrNgApp')
         $rootScope.title = ["Daily ", $scope.currentAsker.subject, " Quiz | Wisr"].join("");
     }
 
-    var fetchSilhouette = function(callback) {
+    function fetchSilhouette(callback) {
       if ($scope.currentAsker)
         $scope.silhouetteImage = $scope.currentAsker.styles["silhouette_image"];
       $scope.silhouetteImage = $scope.silhouetteImage || 'bg_images/nature.svg';
@@ -68,7 +78,7 @@ angular.module('wisrNgApp')
       );
     };
 
-    var blurContainer = function(bool) {
+    function blurContainer(bool) {
       $scope.blurRootContainer = bool;
     };
 

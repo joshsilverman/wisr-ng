@@ -11,14 +11,15 @@ angular.module('wisrNgApp')
       $scope.$watch('correctQIds', broadcastCorrectAnswersLoaded);
       $scope.$watch('publications', broadcastCorrectAnswersLoaded);
       $scope.$on('FeedCtrl:currentUserLoaded', afterCurrentUserLoaded);
+      $scope.$on('FeedCtrl:inFocusPublicationLoaded', onInFocusPublicationLoaded);
     };
 
-    var afterCurrentUserLoaded = function() {
+    function afterCurrentUserLoaded() {
       loadPublications();
       loadCorrectAnswers();
     }
 
-    var loadPublications = function(callback) {
+    function loadPublications(callback) {
       var params = {offset: offset};
       if ($routeParams.subjectURL)
         params.subjectURL = $routeParams.subjectURL;
@@ -30,10 +31,24 @@ angular.module('wisrNgApp')
         function(data) {
           $scope.publications = $scope.publications.concat(data);
           loadingPublications = false;
+          dedupePublications();
       });
     };
 
-    var loadCorrectAnswers = function() {
+    function onInFocusPublicationLoaded(e, rsrc) {
+      $scope.publications.unshift(rsrc);
+      $scope.inFocusPublication = rsrc;
+
+      dedupePublications();
+    }
+
+    function dedupePublications() {
+      $scope.publications = _.uniq($scope.publications, false, function(pub) {
+        return pub.id;
+      })
+    }
+
+    function loadCorrectAnswers() {
       if (!$scope.currentUser.id) return;
 
       CorrectQuestionIdsRsrc.query({currentUserId: $scope.currentUser.id},
@@ -42,7 +57,7 @@ angular.module('wisrNgApp')
       });
     };
 
-    var broadcastCorrectAnswersLoaded = function() {
+    function broadcastCorrectAnswersLoaded() {
       if (!$scope.correctQIds) return;
       $timeout(function() {
         $scope.$broadcast('PublicationsCtrl:correctQIds:loaded', $scope.correctQIds);
