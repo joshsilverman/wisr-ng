@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('wisrNgApp')
-  .controller('PublicationsCtrl', function($scope, $timeout, $routeParams, PublicationsRsrc, CorrectQuestionIdsRsrc) {
+  .controller('PublicationsCtrl', function($scope, $timeout, $routeParams, $route, PublicationsRsrc, CorrectQuestionIdsRsrc) {
     var offset, loadingPublications, asker;
 
     var init = function() {
@@ -26,13 +26,18 @@ angular.module('wisrNgApp')
       else
         $scope.index = true;
 
+      function callback(data) {
+        console.log(data);
+        $scope.publications = $scope.publications.concat(data);
+        loadingPublications = false;
+        dedupePublications();
+      }
+
       loadingPublications = true;
-      PublicationsRsrc.query(params,
-        function(data) {
-          $scope.publications = $scope.publications.concat(data);
-          loadingPublications = false;
-          dedupePublications();
-      });
+      if ($route.current.$$route.params.new)
+        PublicationsRsrc.queryNew(params, callback);
+      else
+        PublicationsRsrc.query(params, callback);
     };
 
     function onInFocusPublicationLoaded(e, rsrc) {
