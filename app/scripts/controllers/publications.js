@@ -44,8 +44,11 @@ angular.module('wisrNgApp')
 
     function dedupePublications() {
       $scope.publications = _.uniq($scope.publications, false, function(pub) {
-        return pub.id;
-      })
+        if (pub.id)
+          return pub.id;
+        else
+          return pub;
+      });
     }
 
     function loadCorrectAnswers() {
