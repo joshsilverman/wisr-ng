@@ -75,5 +75,14 @@ angular.module('wisrNgApp')
       loadPublications();
     };
 
+    $scope.isInFocus = function(publicationId) {
+      if (!$scope.inFocusPublication) return;
+
+      if (!publicationId) return;
+
+      if (publicationId == $scope.inFocusPublication.id)
+        return true;
+    }
+
     init();
   });

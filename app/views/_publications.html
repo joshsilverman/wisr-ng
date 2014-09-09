@@ -6,20 +6,20 @@
     ng-controller='PublicationCtrl'>
 
     <input
-      ng-if="publication.id != inFocusPublication.id"
+      ng-if="!isInFocus(publication.id)"
       class="radio"
       type="radio"></input>
 
     <div
       class="relative"
-      ng-hide="publication.id == inFocusPublication.id">
+      ng-hide="isInFocus(publication.id)">
 
       <span class="timeago" am-time-ago="publication.first_posted_at"></span>
       <span class="circle"></span>
     </div>
     <div
       class="content"
-      ng-class="{active: publication.id == inFocusPublication.id}">
+      ng-class="{active: isInFocus(publication.id)}">
 
       <h3>
         <span class="subject-label" ng-class="{visible: index}">
