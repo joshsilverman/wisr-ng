@@ -40,6 +40,7 @@ angular.module('wisrNgApp')
 
       $rootScope.$on('AuthorQuestionModalCtrl:showAuthorQuestionModal', function() {blurContainer(true)});
       $rootScope.$on('AuthorQuestionModalCtrl:hideAuthorQuestionModal', function() {blurContainer(false)});
+      $scope.$on('PublicationsCtrl:newFeedLoaded', registerNewFeedLoaded);
     };
 
     function loadInFocusPublication() {
@@ -48,6 +49,10 @@ angular.module('wisrNgApp')
       PublicationRsrc.get({id: $routeParams.publicationId}).$promise.then(function(rsrc) {
         $scope.$broadcast('FeedCtrl:inFocusPublicationLoaded', rsrc);
       });
+    }
+
+    function registerNewFeedLoaded() {
+      $scope.isNewFeed = true;
     }
 
     function configStyles() {

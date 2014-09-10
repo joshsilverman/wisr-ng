@@ -33,10 +33,13 @@ angular.module('wisrNgApp')
       }
 
       loadingPublications = true;
-      if ($route.current.$$route.params.new)
+      if ($route.current.$$route.params.new) {
         PublicationsRsrc.queryNew(params, callback);
-      else
+        $scope.$emit('PublicationsCtrl:newFeedLoaded');
+      }
+      else {
         PublicationsRsrc.query(params, callback);
+      }
     };
 
     function onInFocusPublicationLoaded(e, rsrc) {

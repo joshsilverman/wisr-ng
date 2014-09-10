@@ -12,9 +12,13 @@
       Daily {{$parent.currentAsker.subject}} questions
 
       <div>
-        <a ng-href="/{{$parent.currentAsker.subject_url}}">Recent</a>
+        <a
+          ng-class="{'active-feed': !isNewFeed}"
+          ng-href="/{{$parent.currentAsker.subject_url}}">Recent</a>
         /
-        <a ng-href="/{{$parent.currentAsker.subject_url}}/new">Suggested</a>
+        <a
+          ng-class="{'active-feed': isNewFeed}"
+          ng-href="/{{$parent.currentAsker.subject_url}}/new">Suggested</a>
       </div>
     </h2>
   </div>
