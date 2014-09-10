@@ -13,6 +13,7 @@ angular.module('wisrNgApp')
 
     var init = function() {
       $scope.assetBasePath = Paths.assets;
+      $rootScope.assetBasePath = Paths.assets;
       $scope.imageBaseURL = Paths.imageBaseURL;
       $scope.Paths = Paths;
       $rootScope.title = "Daily Quiz Questions | Wisr";

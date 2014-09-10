@@ -11,15 +11,17 @@ angular.module('wisrNgApp')
   .factory('Paths', function (ENV) {
     var envDependentPaths = {
       development: {
-        baseURL: 'http://dev.localhost'
+        baseURL: 'http://dev.localhost',
+        assetsBaseURL: 'http://dev.localhost'
       },
       production: {
-        baseURL: 'https://www.wisr.com'
+        baseURL: 'https://www.wisr.com',
+        assetsBaseURL: 'https://wisr-herokuapp-com.global.ssl.fastly.net'
       }
     };
 
-    return { 
-      'assets': 'https://wisr-herokuapp-com.global.ssl.fastly.net/assets',
+    return {
+      'assets': envDependentPaths[ENV.name].assetsBaseURL + '/assets',
       'imageBaseURL': envDependentPaths[ENV.name].baseURL + '/assets',
       'authBaseURL': 'https://www.wisr.com',
       'apiURL': envDependentPaths[ENV.name].baseURL,
