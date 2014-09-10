@@ -3,18 +3,19 @@
 </div>
 <div class="topfold">
   <span class="asker-photo">
-    <img 
+    <img
       ng-show="$parent.questImage"
       src="{{imageBaseURL}}/{{questImage}}">
   </span>
   <div class="title">
-    <h1>
-      <a href="/">
-        
-      </a>
-    </h1>
     <h2 ng-show="$parent.questImage">
       Daily {{$parent.currentAsker.subject}} questions
+
+      <div>
+        <a ng-href="/{{$parent.currentAsker.subject_url}}">Recent</a>
+        /
+        <a ng-href="/{{$parent.currentAsker.subject_url}}/new">Suggested</a>
+      </div>
     </h2>
   </div>
 </div>
