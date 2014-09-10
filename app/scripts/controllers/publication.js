@@ -13,18 +13,32 @@ angular.module('wisrNgApp')
       $scope.$on('AnswerCtrl:correct', answered);
       $scope.$on('PublicationsCtrl:correctQIds:loaded', markPreviouslyAnswered);
       $scope.correctAId = parseInt($scope.publication._question.correct_answer_id);
+
+      shuffleAnswers();
     };
 
-    var answered = function() {
+    function answered() {
       $scope.answered = true;
     }
 
-    var markPreviouslyAnswered = function(e, correctQuestions) {
+    function markPreviouslyAnswered(e, correctQuestions) {
       if (correctQuestions.ids.indexOf($scope.publication.question_id) >= 0) {
         $scope.answered = true;
         $scope.$broadcast('PublicationCtrl:markPreviouslyAnswered', $scope.correctAId);
       }
     };
+
+    function shuffleAnswers() {
+      var shuffledKeys = _.shuffle(_.keys($scope.publication._answers));
+      $scope.publication._shuffledAnswers = [];
+
+      _.map(shuffledKeys, function(key){
+        $scope.publication._shuffledAnswers.push({
+          id: key,
+          text: $scope.publication._answers[key]
+        });
+      });
+    }
 
     $scope.tellMe = function() {
       $scope.disabled = true;

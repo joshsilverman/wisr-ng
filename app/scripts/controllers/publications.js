@@ -27,7 +27,6 @@ angular.module('wisrNgApp')
         $scope.index = true;
 
       function callback(data) {
-        console.log(data);
         $scope.publications = $scope.publications.concat(data);
         loadingPublications = false;
         dedupePublications();

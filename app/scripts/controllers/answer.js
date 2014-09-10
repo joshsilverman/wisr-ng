@@ -29,11 +29,11 @@ angular.module('wisrNgApp')
         Auth.login();
         return;
       }
-      
+
       params = {
         "asker_id" : $scope.publication.asker_id,
         "publication_id" : $scope.publication.id,
-        "answer_id" : $scope.id};
+        "answer_id" : $scope.answer.id};
 
       $scope.grading = true;
       RespondToQuestionRsrc.save('/respond_to_question', params).
@@ -46,12 +46,12 @@ angular.module('wisrNgApp')
           else {
             $scope.correct = true;
             $scope.$emit('AnswerCtrl:correct');
-          } 
+          }
         });
     };
 
     var markPreviouslyAnswered = function(e, correctAId) {
-      if (correctAId == parseInt($scope.id)) {
+      if (correctAId == parseInt($scope.answer.id)) {
         $scope.correct = true;
       }
     };
