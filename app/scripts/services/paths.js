@@ -16,7 +16,8 @@ angular.module('wisrNgApp')
       },
       production: {
         baseURL: 'https://www.wisr.com',
-        assetsBaseURL: 'https://wisr-herokuapp-com.global.ssl.fastly.net'
+        assetsBaseURL: 'https://www.wisr.com'
+        // assetsBaseURL: 'https://wisr-herokuapp-com.global.ssl.fastly.net'
       }
     };
 
