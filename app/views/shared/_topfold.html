@@ -11,7 +11,7 @@
     <h2 ng-show="$parent.questImage">
       Daily {{$parent.currentAsker.subject}} questions
 
-      <div>
+      <div class='feed-selection'>
         <a
           ng-class="{'active-feed': !isNewFeed}"
           ng-href="/{{$parent.currentAsker.subject_url}}">Recent</a>
