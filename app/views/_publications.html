@@ -1,5 +1,10 @@
 <ul class="timeline">
   <li
+    ng-include="'/views/_new_question.html'"
+    class="feed-publication"
+    style='display:inherit;'>
+  </li>
+  <li
     ng-repeat='publication in publications'
     class="feed-publication"
     style='display:inherit;'
