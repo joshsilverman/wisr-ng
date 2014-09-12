@@ -7,11 +7,11 @@
     <div class="answer correct">
       <span>Enter correct answer</span>
     </div>
-    <div class="answer incorrect">
-      <span>An incorrect answer</span>
-    </div>
-    <div class="answer incorrect">
-      <span>Another incorrect answer</span>
+    <div
+      ng-repeat="incorrectAnswer in incorrectAnswers"
+      class="answer incorrect">
+
+      <span>{{incorrectAnswer.text}}</span>
     </div>
   </div>
 </div>
