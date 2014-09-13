@@ -1,17 +1,26 @@
 <div class="content">
   <h3>
-    <span>Suggest a new question</span>
+    <span>
+      <input placeholder='Suggest a new question' />
+    </span>
   </h3>
 
   <div class="answers">
     <div class="answer correct">
-      <span>Enter correct answer</span>
+      <span>
+        <input placeholder='Enter correct answer' />
+      </span>
     </div>
     <div
       ng-repeat="incorrectAnswer in incorrectAnswers"
       class="answer incorrect">
 
-      <span>{{incorrectAnswer.text}}</span>
+      <span>
+        <input
+          ng-change='updateAnswers()'
+          placeholder='Another incorrect answer'
+          ng-model='incorrectAnswer.text' />
+      </span>
     </div>
   </div>
 </div>

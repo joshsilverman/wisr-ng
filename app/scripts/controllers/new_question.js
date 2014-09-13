@@ -11,6 +11,8 @@ angular.module('wisrNgApp')
   .controller('NewQuestionCtrl', function ($scope) {
     function init() {
       initIncorrectAnswers();
+
+      // $scope.$watch('incorrectAnswers', updateAnswers)
     }
 
     function initIncorrectAnswers() {
@@ -20,8 +22,15 @@ angular.module('wisrNgApp')
 
     function pushIncorrectAnswer() {
       $scope.incorrectAnswers.push({
-        text: 'Another incorrect answer'
+        text: ''
       });
+    }
+
+    $scope.updateAnswers = function() {
+      if ($scope.incorrectAnswers.length >= 3) return;
+
+      if (_.last($scope.incorrectAnswers).text.length)
+        pushIncorrectAnswer();
     }
 
     init();
