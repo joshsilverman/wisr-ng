@@ -1,14 +1,14 @@
 <div class="content">
   <h3>
     <span>
-      <input placeholder='Suggest a new question' />
+      <input ng-model='question.text' placeholder='Suggest a new question' />
     </span>
   </h3>
 
   <div class="answers">
     <div class="answer correct">
       <span>
-        <input placeholder='Enter correct answer' />
+        <input ng-model='correctAnswer.text' placeholder='Enter correct answer' />
       </span>
     </div>
     <div
@@ -21,6 +21,9 @@
           placeholder='Another incorrect answer'
           ng-model='incorrectAnswer.text' />
       </span>
+    </div>
+    <div class='answer' ng-click='submit()'>
+      Suggest this question
     </div>
   </div>
 </div>

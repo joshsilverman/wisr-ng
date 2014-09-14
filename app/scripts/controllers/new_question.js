@@ -8,14 +8,26 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('NewQuestionCtrl', function ($scope) {
+  .controller('NewQuestionCtrl', function ($scope, NewQuestionRsrc, CurrentUser) {
     function init() {
-      initIncorrectAnswers();
+      initModels();
 
-      // $scope.$watch('incorrectAnswers', updateAnswers)
+      $scope.$on('FeedCtrl:fetchedCurrentAsker', registerCurrentAsker);
+      CurrentUser(registerCurrentUser);
     }
 
-    function initIncorrectAnswers() {
+    function registerCurrentAsker(e, _currentAsker) {
+      $scope.currentAsker = _currentAsker;
+    }
+
+    function registerCurrentUser(_currentUser) {
+      $scope.currentUser = _currentUser;
+    }
+
+    function initModels() {
+      $scope.question = {text: ""};
+      $scope.correctAnswer = {text: ""};
+
       $scope.incorrectAnswers = [];
       pushIncorrectAnswer();
     }
@@ -31,6 +43,31 @@ angular.module('wisrNgApp')
 
       if (_.last($scope.incorrectAnswers).text.length)
         pushIncorrectAnswer();
+    }
+
+    $scope.submit = function() {
+      var params = buildParams();
+
+      console.log(params);
+      NewQuestionRsrc.save(params, function() {
+        debugger;
+      });
+    }
+
+    function buildParams() {
+      var params = {
+        question: $scope.question.text,
+        asker_id: $scope.currentAsker.id,
+        canswer: $scope.correctAnswer.text
+      };
+
+      _.each($scope.incorrectAnswers, function(ianswer, i) {
+        if (!ianswer.text) return;
+
+        params['ianswer' + (i + 1)] = ianswer.text;
+      });
+
+      return params;
     }
 
     init();
