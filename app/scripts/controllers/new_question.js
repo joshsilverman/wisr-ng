@@ -49,7 +49,8 @@ angular.module('wisrNgApp')
       var params = buildParams();
 
       NewQuestionRsrc.save(params, function() {
-        debugger;
+        var path = ['/', $scope.currentAsker.subject_url, '/new'].join('');
+        document.location.href = path;
       });
     }
 
