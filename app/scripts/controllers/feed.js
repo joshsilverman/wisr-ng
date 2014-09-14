@@ -9,8 +9,6 @@
  */
 angular.module('wisrNgApp')
   .controller('FeedCtrl', function($scope, $routeParams, $http, $sce, $rootScope, Paths, CurrentUser, AskersRsrc, PublicationRsrc) {
-    var offset, loadingPublications;
-
     var init = function() {
       $scope.assetBasePath = Paths.assets;
       $rootScope.assetBasePath = Paths.assets;
