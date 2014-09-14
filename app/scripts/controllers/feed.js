@@ -32,8 +32,8 @@ angular.module('wisrNgApp')
           return a.subject_url == $routeParams.subjectURL;
         });
 
-        $scope.$emit('FeedCtrl::fetchedCurrentAsker', $scope.currentAsker);
-        $scope.$broadcast('FeedCtrl::fetchedCurrentAsker', $scope.currentAsker);
+        $scope.$emit('FeedCtrl:fetchedCurrentAsker', $scope.currentAsker);
+        $scope.$broadcast('FeedCtrl:fetchedCurrentAsker', $scope.currentAsker);
 
         configStyles();
       });

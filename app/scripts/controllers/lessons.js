@@ -12,7 +12,7 @@ angular.module('wisrNgApp')
     var currentAsker;
 
     var init = function() {
-      $scope.$on('FeedCtrl::fetchedCurrentAsker', function(e, _currentAsker) {
+      $scope.$on('FeedCtrl:fetchedCurrentAsker', function(e, _currentAsker) {
         currentAsker = _currentAsker;
         loadLessonCounts();
       });
