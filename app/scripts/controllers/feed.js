@@ -38,8 +38,6 @@ angular.module('wisrNgApp')
         configStyles();
       });
 
-      $rootScope.$on('AuthorQuestionModalCtrl:showAuthorQuestionModal', function() {blurContainer(true)});
-      $rootScope.$on('AuthorQuestionModalCtrl:hideAuthorQuestionModal', function() {blurContainer(false)});
       $scope.$on('PublicationsCtrl:newFeedLoaded', registerNewFeedLoaded);
     };
 
@@ -82,10 +80,6 @@ angular.module('wisrNgApp')
           callback.call();
         }
       );
-    };
-
-    function blurContainer(bool) {
-      $scope.blurRootContainer = bool;
     };
 
     init();

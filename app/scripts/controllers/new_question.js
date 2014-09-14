@@ -48,7 +48,6 @@ angular.module('wisrNgApp')
     $scope.submit = function() {
       var params = buildParams();
 
-      console.log(params);
       NewQuestionRsrc.save(params, function() {
         debugger;
       });
