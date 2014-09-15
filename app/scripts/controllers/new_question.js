@@ -72,10 +72,24 @@ angular.module('wisrNgApp')
     }
 
     function validate(params) {
-      if (!params.asker_id) return false;
-      if (!params.question) return false;
-      if (!params.canswer) return false;
-      if (!params.ianswer1) return false;
+      if (!params.asker_id) {
+        return false;
+      }
+
+      if (!params.question) {
+        alert('Please enter a question.');
+        return false;
+      }
+
+      if (!params.canswer) {
+        alert('Please enter a correct answer.');
+        return false;
+      }
+
+      if (!params.ianswer1) {
+        alert('Please enter an incorrect answer.');
+        return false;
+      }
 
       return true;
     }
