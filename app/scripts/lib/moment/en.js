@@ -4,7 +4,7 @@
 
 (function (factory) {
     if (!window.moment) return;
-    
+
     factory(window.moment); // Browser global
 
     // if (typeof define === 'function' && define.amd) {
@@ -39,7 +39,7 @@
         relativeTime : {
             future : "in %s",
             past : "%s",
-            s : "just now",
+            s : "now",
             m : "1m",
             mm : "%dm",
             h : "1h",
