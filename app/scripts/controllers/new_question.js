@@ -47,6 +47,7 @@ angular.module('wisrNgApp')
 
     $scope.submit = function() {
       var params = buildParams();
+      if (!validate(params)) return;
 
       NewQuestionRsrc.save(params, function() {
         var path = ['/', $scope.currentAsker.subject_url, '/new'].join('');
@@ -68,6 +69,15 @@ angular.module('wisrNgApp')
       });
 
       return params;
+    }
+
+    function validate(params) {
+      if (!params.asker_id) return false;
+      if (!params.question) return false;
+      if (!params.canswer) return false;
+      if (!params.ianswer1) return false;
+
+      return true;
     }
 
     init();
