@@ -15,32 +15,32 @@ angular.module('wisrNgApp')
     };
 
     function afterCurrentUserLoaded() {
-      loadPublications();
+      fetchPublications();
       loadCorrectAnswers();
     }
 
-    function loadPublications(callback) {
+    function fetchPublications() {
       var params = {offset: offset};
       if ($routeParams.subjectURL)
         params.subjectURL = $routeParams.subjectURL;
       else
         $scope.index = true;
 
-      function callback(data) {
-        $scope.publications = $scope.publications.concat(data);
-        loadingPublications = false;
-        dedupePublications();
-      }
-
       loadingPublications = true;
       if ($route.current.$$route.params.new) {
-        PublicationsRsrc.queryNew(params, callback);
+        PublicationsRsrc.queryNew(params, afterFetchPublications);
         $scope.$emit('PublicationsCtrl:newFeedLoaded');
       }
       else {
-        PublicationsRsrc.query(params, callback);
+        PublicationsRsrc.query(params, afterFetchPublications);
       }
     };
+
+    function afterFetchPublications(data) {
+      $scope.publications = $scope.publications.concat(data);
+      loadingPublications = false;
+      dedupePublications();
+    }
 
     function onInFocusPublicationLoaded(e, rsrc) {
       $scope.publications.unshift(rsrc);
@@ -79,7 +79,7 @@ angular.module('wisrNgApp')
       if ($scope.publications.length == 0) {return;}
 
       offset += 10;
-      loadPublications();
+      fetchPublications();
     };
 
     $scope.isInFocus = function(publicationId) {
