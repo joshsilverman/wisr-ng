@@ -7,6 +7,10 @@ angular.module('wisrNgApp').factory('PublicationsRsrc', function($resource, Path
       queryNew: {
         url: Paths.apiURL + '/:subjectURL/new.json?offset=:offset',
         isArray: true
+      },
+      queryLesson: {
+        url: Paths.apiURL + '/:subjectURL/:lesson/quiz.json?offset=:offset',
+        isArray: true
       }
     });
 });

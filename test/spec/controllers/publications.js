@@ -18,6 +18,7 @@ describe('Controller: PublicationsCtrl', function () {
     _PublicationsRsrc_ = $injector.get('PublicationsRsrc');
     spyOn(_PublicationsRsrc_, 'query');
     spyOn(_PublicationsRsrc_, 'queryNew');
+    spyOn(_PublicationsRsrc_, 'queryLesson');
   }));
 
   it('should query Publications resource and set publications to scope', function () {
@@ -49,7 +50,7 @@ describe('Controller: PublicationsCtrl', function () {
   });
 
   it('should query lesson Publications and set publications to scope', function () {
-    root = {current: {$$route: {params: {quiz: true}}}};
+    root = {current: {$$route: {params: {lesson: true}}}};
     PublicationsCtrl = _controller_('PublicationsCtrl', {
       $scope: scope,
       PublicationsRsrc: _PublicationsRsrc_,

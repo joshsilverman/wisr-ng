@@ -30,6 +30,10 @@ angular.module('wisrNgApp')
       if ($route.current.$$route.params.new) {
         PublicationsRsrc.queryNew(params, afterFetchPublications);
         $scope.$emit('PublicationsCtrl:newFeedLoaded');
+      } else if ($route.current.$$route.params.lesson) {
+        params.lesson = $routeParams.lesson;
+        PublicationsRsrc.queryLesson(params, afterFetchPublications);
+        $scope.$emit('PublicationsCtrl:newFeedLoaded');
       }
       else {
         PublicationsRsrc.query(params, afterFetchPublications);
