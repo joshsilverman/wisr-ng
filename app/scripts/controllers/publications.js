@@ -81,6 +81,7 @@ angular.module('wisrNgApp')
     $scope.loadMore = function() {
       if (loadingPublications) {return;}
       if ($scope.publications.length == 0) {return;}
+      if ($route.current.$$route.params.lesson) {return;}
 
       offset += 10;
       fetchPublications();
