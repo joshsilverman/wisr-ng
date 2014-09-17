@@ -62,4 +62,18 @@ describe('Controller: PublicationsCtrl', function () {
     expect(_PublicationsRsrc_.queryLesson).toHaveBeenCalled();
     expect(scope.publications).toBeDefined();
   });
+
+  it('should load more', function () {
+    root = {current: {$$route: {params: {}}}};
+    PublicationsCtrl = _controller_('PublicationsCtrl', {
+      $scope: scope,
+      PublicationsRsrc: _PublicationsRsrc_,
+      $route: root
+    });
+
+    scope.publications = ['publication stub']
+    scope.loadMore();
+
+    expect(_PublicationsRsrc_.query).toHaveBeenCalled();
+  });
 });
