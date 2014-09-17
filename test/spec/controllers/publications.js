@@ -59,7 +59,7 @@ describe('Controller: PublicationsCtrl', function () {
 
     scope.$emit('FeedCtrl:currentUserLoaded');
 
-    expect(_PublicationsRsrc_.queryNew).toHaveBeenCalled();
+    expect(_PublicationsRsrc_.queryLesson).toHaveBeenCalled();
     expect(scope.publications).toBeDefined();
   });
 });
