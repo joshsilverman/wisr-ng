@@ -9,7 +9,7 @@
  */
 angular.module('wisrNgApp')
   .controller('FeedCtrl', function($scope, $routeParams, $http, $sce, $rootScope, Paths, CurrentUser, AskersRsrc, PublicationRsrc) {
-    var init = function() {
+    function init() {
       $scope.assetBasePath = Paths.assets;
       $rootScope.assetBasePath = Paths.assets;
       $scope.imageBaseURL = Paths.imageBaseURL;
