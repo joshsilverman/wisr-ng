@@ -37,6 +37,9 @@ angular.module('wisrNgApp')
       });
 
       $scope.$on('PublicationsCtrl:newFeedLoaded', registerNewFeedLoaded);
+
+      $scope.$on('PublicationsCtrl:lessonLoaded', registerLesson);
+      $scope.$on('PublicationsCtrl:lessonLoaded', setTitle);
     };
 
     function loadInFocusPublication() {
@@ -49,6 +52,10 @@ angular.module('wisrNgApp')
 
     function registerNewFeedLoaded() {
       $scope.isNewFeed = true;
+    }
+
+    function registerLesson(e, lesson) {
+      $scope.lesson = lesson;
     }
 
     function configStyles() {
@@ -83,10 +90,15 @@ angular.module('wisrNgApp')
       $rootScope.title = "Daily Quiz Questions | Wisr";
       $scope.title = "Daily quiz questions";
 
-      if ($scope.currentAsker) {
+      if ($scope.lesson && $scope.currentAsker)
+        $scope.title = [$scope.currentAsker.subject, $scope.lesson.name, "Quiz"].join(" ");
+      else if ($scope.lesson)
+        $scope.title = [$scope.lesson.name, "Quiz"].join(" ");
+      else if ($scope.currentAsker)
         $scope.title = ["Daily", $scope.currentAsker.subject, "questions"].join(" ");
+
+      if ($scope.lesson || $scope.currentAsker)
         $rootScope.title = [$scope.title, "| Wisr"].join(" ");
-      }
     }
 
     init();

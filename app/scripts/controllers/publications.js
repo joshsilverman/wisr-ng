@@ -33,7 +33,6 @@ angular.module('wisrNgApp')
       } else if ($route.current.$$route.params.lesson) {
         params.lesson = $routeParams.lesson;
         PublicationsRsrc.queryLesson(params, afterFetchPublications);
-        $scope.$emit('PublicationsCtrl:newFeedLoaded');
       }
       else {
         PublicationsRsrc.query(params, afterFetchPublications);
@@ -44,6 +43,17 @@ angular.module('wisrNgApp')
       $scope.publications = $scope.publications.concat(data);
       loadingPublications = false;
       dedupePublications();
+      emitLesson();
+    }
+
+    function emitLesson() {
+      if ($scope.publications.length) {
+        var lesson = $scope.publications[0]._lesson;
+
+        if (lesson) {
+          $scope.$emit('PublicationsCtrl:lessonLoaded', lesson);
+        }
+      }
     }
 
     function onInFocusPublicationLoaded(e, rsrc) {
