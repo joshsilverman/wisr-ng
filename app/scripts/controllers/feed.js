@@ -14,7 +14,7 @@ angular.module('wisrNgApp')
       $rootScope.assetBasePath = Paths.assets;
       $scope.imageBaseURL = Paths.imageBaseURL;
       $scope.Paths = Paths;
-      $rootScope.title = "Daily Quiz Questions | Wisr";
+      setTitle();
 
       loadInFocusPublication();
 
@@ -63,8 +63,7 @@ angular.module('wisrNgApp')
         $scope.questImage = $scope.questImage || "quests/scholar.png";
       });
 
-      if ($scope.currentAsker)
-        $rootScope.title = ["Daily ", $scope.currentAsker.subject, " Quiz | Wisr"].join("");
+      setTitle();
     }
 
     function fetchSilhouette(callback) {
@@ -79,6 +78,16 @@ angular.module('wisrNgApp')
         }
       );
     };
+
+    function setTitle() {
+      $rootScope.title = "Daily Quiz Questions | Wisr";
+      $scope.title = "Daily quiz questions";
+
+      if ($scope.currentAsker) {
+        $scope.title = ["Daily", $scope.currentAsker.subject, "questions"].join(" ");
+        $rootScope.title = [$scope.title, "| Wisr"].join(" ");
+      }
+    }
 
     init();
   });
