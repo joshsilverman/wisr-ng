@@ -14,16 +14,27 @@ angular.module('wisrNgApp')
       $rootScope.assetBasePath = Paths.assets;
       $scope.imageBaseURL = Paths.imageBaseURL;
       $scope.Paths = Paths;
-      setTitle();
 
       loadInFocusPublication();
+      loadCurrentUser();
+      loadAskers();
 
+      $scope.$on('PublicationsCtrl:newFeedLoaded', registerNewFeedLoaded);
+      $scope.$on('PublicationsCtrl:lessonLoaded', registerLesson);
+      $scope.$on('PublicationsCtrl:lessonLoaded', setTitle);
+
+      setTitle();
+    };
+
+    function loadCurrentUser() {
       CurrentUser(function(_currentUser) {
         $scope.currentUser = _currentUser;
         $scope.authenticated = $scope.currentUser.id;
         $scope.$broadcast('FeedCtrl:currentUserLoaded');
       });
+    }
 
+    function loadAskers() {
       AskersRsrc.query().$promise.then(function(_askers) {
         $scope.askers = _askers;
         $scope.currentAsker = _.find($scope.askers, function(a) {
@@ -35,12 +46,7 @@ angular.module('wisrNgApp')
 
         configStyles();
       });
-
-      $scope.$on('PublicationsCtrl:newFeedLoaded', registerNewFeedLoaded);
-
-      $scope.$on('PublicationsCtrl:lessonLoaded', registerLesson);
-      $scope.$on('PublicationsCtrl:lessonLoaded', setTitle);
-    };
+    }
 
     function loadInFocusPublication() {
       if (!$routeParams.publicationId) return;
