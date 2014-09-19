@@ -1,6 +1,6 @@
 <ul class="timeline">
   <li
-    ng-show="currentUser.id && currentAsker.id"
+    ng-show="currentUser.id && currentAsker.id && !$parent.lesson"
     ng-include="'/views/_new_question.html'"
     ng-controller='NewQuestionCtrl'
     class="feed-publication"
