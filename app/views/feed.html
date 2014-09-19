@@ -9,7 +9,8 @@
 <div
   class='columns'
   ng-controller='PublicationsCtrl'
-  ng-show='publications.length'>
+  ng-show='publications.length'
+  ng-class='{quiz: lesson}'>
 
   <div
     ng-include="'/views/_publications.html'"

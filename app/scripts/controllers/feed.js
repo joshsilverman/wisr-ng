@@ -61,7 +61,8 @@ angular.module('wisrNgApp')
     }
 
     function registerLesson(e, lesson) {
-      $scope.lesson = lesson;
+      if (lesson.name)
+        $scope.lesson = lesson;
     }
 
     function configStyles() {

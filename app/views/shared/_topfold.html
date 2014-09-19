@@ -11,7 +11,9 @@
     <h2 ng-show="$parent.questImage">
       {{$parent.title}}
 
-      <div class='feed-selection'>
+      <div
+        ng-hide='$parent.lesson'
+        class='feed-selection'>
         <a
           ng-class="{'active-feed': !isNewFeed}"
           ng-href="/{{$parent.currentAsker.subject_url}}">Recent</a>
