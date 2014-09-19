@@ -8,8 +8,12 @@
       src="{{imageBaseURL}}/{{questImage}}">
   </span>
   <div class="title">
+    <h1 ng-show='$parent.lesson'>
+      <a ng-href="/{{$parent.currentAsker.subject_url}}">{{$parent.currentAsker.subject}}</a>
+    </h1>
+
     <h2 ng-show="$parent.questImage">
-      {{$parent.title}}
+      <span>{{$parent.title}}</span>
 
       <div
         ng-hide='$parent.lesson'
