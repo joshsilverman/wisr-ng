@@ -8,7 +8,7 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('LessonsCtrl', function ($scope, $rootScope, Paths, LessonsRsrc, LessonAnswerCountsRsrc) {
+  .controller('LessonsCtrl', function ($scope, $rootScope, $location, Paths, LessonsRsrc, LessonAnswerCountsRsrc) {
     var currentAsker;
 
     var init = function() {
@@ -36,8 +36,8 @@ angular.module('wisrNgApp')
     }
 
     $scope.navToLesson = function(subject_url, topic_url) {
-      var url = [Paths.legacyURL, '/', subject_url, '/', topic_url, '/quiz'];
-      window.location.href = url.join('');
+      var url = ['/', subject_url, '/', topic_url, '/quiz'];
+      $location.path(url.join(''));
     };
 
     init();
