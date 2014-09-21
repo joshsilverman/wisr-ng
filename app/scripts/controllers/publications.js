@@ -34,6 +34,7 @@ angular.module('wisrNgApp')
       } else if ($route.current.$$route.params.lesson) {
         params.lesson = $routeParams.lesson;
         PublicationsRsrc.queryLesson(params, afterFetchPublications);
+        emitLesson();
       }
       else {
         PublicationsRsrc.query(params, afterFetchPublications);
@@ -52,7 +53,6 @@ angular.module('wisrNgApp')
       $scope.publications = $scope.publications.concat(data);
       loadingPublications = false;
       dedupePublications();
-      emitLesson();
     }
 
     function emitLesson() {
