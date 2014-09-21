@@ -12,6 +12,7 @@ angular.module('wisrNgApp')
       $scope.$watch('publications', broadcastCorrectAnswersLoaded);
       $scope.$on('FeedCtrl:currentUserLoaded', afterCurrentUserLoaded);
       $scope.$on('FeedCtrl:inFocusPublicationLoaded', onInFocusPublicationLoaded);
+      $(window).on('ios:refresh', iOSRefresh);
     };
 
     function afterCurrentUserLoaded() {
@@ -38,6 +39,14 @@ angular.module('wisrNgApp')
         PublicationsRsrc.query(params, afterFetchPublications);
       }
     };
+
+    function iOSRefresh() {
+      PublicationsRsrc.query({offset: 0}, function(data) {
+        window.location.href = 'ios://refreshed';
+        $scope.publications = [];
+        afterFetchPublications(data)
+      });
+    }
 
     function afterFetchPublications(data) {
       $scope.publications = $scope.publications.concat(data);
