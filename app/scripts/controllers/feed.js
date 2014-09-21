@@ -8,7 +8,7 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('FeedCtrl', function($scope, $routeParams, $http, $sce, $rootScope, Paths, CurrentUser, AskersRsrc, PublicationRsrc) {
+  .controller('FeedCtrl', function($scope, $routeParams, $http, $sce, $rootScope, Paths, CurrentUser, AskersRsrc, PublicationRsrc, VariantsRsrc) {
     function init() {
       $scope.assetBasePath = Paths.assets;
       $rootScope.assetBasePath = Paths.assets;
@@ -18,6 +18,7 @@ angular.module('wisrNgApp')
       loadInFocusPublication();
       loadCurrentUser();
       loadAskers();
+      loadVariant();
 
       $scope.$on('PublicationsCtrl:newFeedLoaded', registerNewFeedLoaded);
       $scope.$on('PublicationsCtrl:lessonLoaded', registerLesson);
@@ -53,6 +54,19 @@ angular.module('wisrNgApp')
 
       PublicationRsrc.get({id: $routeParams.publicationId}).$promise.then(function(rsrc) {
         $scope.$broadcast('FeedCtrl:inFocusPublicationLoaded', rsrc);
+      });
+    }
+
+    function loadVariant() {
+      VariantsRsrc.get(function(variant) {
+        if (variant.name == 'phone') {
+          $rootScope.iOS = true;
+          $scope.iOS = true;
+        }
+        else {
+          $scope.web = true;
+          $rootScope.web = true;
+        }
       });
     }
 
