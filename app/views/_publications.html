@@ -1,5 +1,6 @@
 <ul class="timeline">
   <li
+    ng-if="$parent.web"
     ng-show="currentUser.id && currentAsker.id && !$parent.lesson"
     ng-include="'/views/_new_question.html'"
     ng-controller='NewQuestionCtrl'
@@ -32,8 +33,11 @@
       ng-class="{active: isInFocus(publication.id)}">
 
       <h3>
-        <span class="subject-label" ng-class="{visible: index}">
-          <a ng-href="/{{publication._asker.subject_url}}">{{publication._asker.subject}}</a>
+        <span
+          class="subject-label"
+          ng-class="{visible: index}">
+
+          <a ng-href="/{{publication._asker.subject_url}}" ng-class='{disabled:$parent.iOS}'>{{publication._asker.subject}}</a>
         </span>
         <span class="timeago" am-time-ago="publication.first_posted_at || publication.created_at"></span>
         <span>{{publication._question.text}}</span>
