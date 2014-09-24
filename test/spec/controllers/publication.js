@@ -11,12 +11,15 @@ describe('Controller: PublicationCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
+    scope.publication = {_question: {correct_answer_id: 123}};
+
     PublicationCtrl = $controller('PublicationCtrl', {
       $scope: scope
     });
   }));
 
-  // it('should attach a list of awesomeThings to the scope', function () {
-  //   expect(scope.awesomeThings.length).toBe(3);
-  // });
+  it('answering a question correctly sets promptForNewQuestion to true on scope', function () {
+    scope.$emit('AnswerCtrl:correct');
+    expect(scope.promptForNewQuestion).toBe(true);
+  });
 });

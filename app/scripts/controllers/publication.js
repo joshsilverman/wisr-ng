@@ -11,6 +11,7 @@ angular.module('wisrNgApp')
   .controller('PublicationCtrl', function ($scope) {
     var init = function() {
       $scope.$on('AnswerCtrl:correct', answered);
+      $scope.$on('AnswerCtrl:correct', promptForNewQuestion);
       $scope.$on('PublicationsCtrl:correctQIds:loaded', markPreviouslyAnswered);
       $scope.correctAId = parseInt($scope.publication._question.correct_answer_id);
 
@@ -38,6 +39,10 @@ angular.module('wisrNgApp')
           text: $scope.publication._answers[key]
         });
       });
+    }
+
+    function promptForNewQuestion() {
+      $scope.promptForNewQuestion = true;
     }
 
     $scope.tellMe = function() {

@@ -42,6 +42,7 @@ angular.module('wisrNgApp')
 
           if (data[0] == 'f') {
             $scope.correct = false;
+            $scope.$emit('AnswerCtrl:incorrect');
           }
           else {
             $scope.correct = true;
