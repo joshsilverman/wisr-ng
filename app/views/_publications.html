@@ -1,13 +1,5 @@
 <ul class="timeline">
   <li
-    ng-if="$parent.web"
-    ng-show="currentUser.id && currentAsker.id && !$parent.lesson"
-    ng-include="'/views/_new_question.html'"
-    ng-controller='NewQuestionCtrl'
-    class="feed-publication"
-    style='display:inherit;'>
-  </li>
-  <li
     ng-repeat='publication in publications'
     class="feed-publication"
     style='display:inherit;'
@@ -69,6 +61,15 @@
         <a></a>
       </h4>
     </div>
+
+    <div
+      ng-show="promptForNewQuestion"
+      ng-include="'/views/_new_question.html'"
+      ng-controller='NewQuestionCtrl'
+      class="feed-publication new-question"
+      style='display:inherit;'>
+    </div>
+
   </li>
   <div class="load-more">
     <div class="phone-variant-hide">
