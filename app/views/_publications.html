@@ -61,14 +61,16 @@
         <a></a>
       </h4>
     </div>
+    <div 
+      class='meta-info'
+      ng-include="'/views/_publication_meta_info.html'"></div>
 
     <div
       ng-show="promptForNewQuestion"
       ng-include="'/views/_new_question.html'"
       ng-controller='NewQuestionCtrl'
       class="feed-publication new-question"
-      style='display:inherit;'>
-    </div>
+      style='display:inherit;'></div>
 
   </li>
   <div class="load-more">
