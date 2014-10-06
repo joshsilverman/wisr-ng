@@ -62,7 +62,8 @@
       </h4>
     </div>
     <div 
-      class='meta-info'
+      class='meta-info meta-info-empty'
+      ng-class='{"meta-info-present": publication._question.author_twi_screen_name}'
       ng-include="'/views/_publication_meta_info.html'"
       ng-controller="PublicationMetaInfoCtrl"></div>
 
