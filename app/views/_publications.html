@@ -63,7 +63,9 @@
     </div>
     <div 
       class='meta-info'
-      ng-class='{"meta-info-present": publication._question.author_twi_screen_name}'
+      ng-class='{
+        "meta-info-present": publication._question.author_twi_screen_name,
+        "active": isInFocus(publication.id)}'
       ng-include="'/views/_publication_meta_info.html'"
       ng-controller="PublicationMetaInfoCtrl"></div>
 
