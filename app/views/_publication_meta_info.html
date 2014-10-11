@@ -7,3 +7,13 @@
     {{created_at | amDateFormat:"M/DD/YY"}}
   </span>
 </div>
+
+<div class='answer-stats' ng-show='answered_count'>
+  <span>
+    Answered {{answered_count}} times
+  </span>
+
+  <span>
+    {{percent_correct | number:0}}% correct
+  </span>
+</div>
