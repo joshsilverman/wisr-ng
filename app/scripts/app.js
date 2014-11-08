@@ -18,7 +18,8 @@ angular
     'ngTouch',
     'config',
     'infinite-scroll',
-    'angularMoment'
+    'angularMoment',
+    'ui.bootstrap'
   ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $locationProvider.html5Mode(true);
