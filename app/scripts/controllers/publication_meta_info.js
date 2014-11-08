@@ -47,18 +47,26 @@ angular.module('wisrNgApp')
         $scope.percent_correct = correctCount / (incorrectCount + correctCount) * 100;
     }
 
-    $scope.hoveringOver = function(value) {
-      $scope.overStar = value;
-      $scope.percent = 100 * (value / $scope.max);
+    $scope.hoveringOver = function(score) {
+      $scope.overStar = score;
+      $scope.percent = 100 * (score / $scope.max);
     };
 
     function setRating() {
-      $scope.rating = {value: 3};
-      $scope.$watch('rating.value', changeRating);
+      $scope.prevRatingScore = 3;
+      $scope.rating = {score: 3};
+      $scope.$watch('rating.score', changeRating);
     }
 
     function changeRating() {
-      RatingsRsrc.save();
+      if ($scope.rating.score == $scope.prevRatingScore) 
+        return;
+      else
+        $scope.prevRatingScore = $scope.rating.score;
+
+      RatingsRsrc.save({
+        score: $scope.rating.score,
+        question_id: $scope.publication.question_id});
     }
 
     init();
