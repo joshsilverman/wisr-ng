@@ -17,3 +17,17 @@
     {{percent_correct | number:0}}% correct
   </span>
 </div>
+
+<div class='rating'>
+  Rating:
+  <rating 
+    class='rating-container'
+    ng-model="rating.value" 
+    max="5" 
+    readonly="false" 
+    on-hover="hoveringOver(value)" 
+    on-leave="overStar=null"
+    state-on="'icon icon-star'" 
+    state-off="'icon icon-star-empty'">
+  </rating>
+</div>

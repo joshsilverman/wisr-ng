@@ -8,10 +8,11 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('PublicationMetaInfoCtrl', function ($scope) {
+  .controller('PublicationMetaInfoCtrl', function ($scope, RatingsRsrc) {
     function init() {
       setAuthorInfo();
-      setCounts();
+      setCounts();      
+      setRating();
     }
 
     function setAuthorInfo() { 
@@ -44,6 +45,20 @@ angular.module('wisrNgApp')
 
       if ((incorrectCount + correctCount) > 0)
         $scope.percent_correct = correctCount / (incorrectCount + correctCount) * 100;
+    }
+
+    $scope.hoveringOver = function(value) {
+      $scope.overStar = value;
+      $scope.percent = 100 * (value / $scope.max);
+    };
+
+    function setRating() {
+      $scope.rating = {value: 3};
+      $scope.$watch('rating.value', changeRating);
+    }
+
+    function changeRating() {
+      RatingsRsrc.save();
     }
 
     init();
