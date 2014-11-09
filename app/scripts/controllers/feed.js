@@ -118,7 +118,7 @@ angular.module('wisrNgApp')
 
       if ($scope.lesson || $scope.currentAsker)
         $rootScope.title = [$scope.title, "| Wisr"].join(" ");
-    }
+    } 
 
     init();
   });

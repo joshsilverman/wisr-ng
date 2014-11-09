@@ -6,7 +6,10 @@ angular.module('wisrNgApp').factory('CorrectQuestionIdsRsrc', function($resource
         query: {
           method: 'GET',
           transformResponse: function (data, headers) {
-            return {ids: JSON.parse(data)};
+            if (data)
+              return {ids: JSON.parse(data)};
+            else
+              return {ids: []};
           }
         }
       }

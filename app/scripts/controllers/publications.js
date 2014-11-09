@@ -1,23 +1,26 @@
 'use strict';
 
 angular.module('wisrNgApp')
-  .controller('PublicationsCtrl', function($scope, $timeout, $routeParams, $route, PublicationsRsrc, CorrectQuestionIdsRsrc) {
+  .controller('PublicationsCtrl', function($scope, $q, $timeout, $routeParams, $route, PublicationsRsrc, CorrectQuestionIdsRsrc, RatingsRsrc) {
     var offset, loadingPublications, asker;
 
     var init = function() {
       $scope.publications = [];
       offset = 0;
 
-      $scope.$watch('correctQIds', broadcastCorrectAnswersLoaded);
-      $scope.$watch('publications', broadcastCorrectAnswersLoaded);
       $scope.$on('FeedCtrl:currentUserLoaded', afterCurrentUserLoaded);
       $scope.$on('FeedCtrl:inFocusPublicationLoaded', onInFocusPublicationLoaded);
       $(window).on('ios:refresh', iOSRefresh);
     };
 
     function afterCurrentUserLoaded() {
-      fetchPublications();
-      loadCorrectAnswers();
+      var promises = [fetchPublications()];
+      if ($scope.currentUser.id) {
+        promises.push(CorrectQuestionIdsRsrc.query({currentUserId: $scope.currentUser.id}).$promise);
+        promises.push(RatingsRsrc.query().$promise);
+      }
+
+      $q.all(promises).then(afterFetchPublications);
     }
 
     function fetchPublications() {
@@ -29,14 +32,14 @@ angular.module('wisrNgApp')
 
       loadingPublications = true;
       if ($route.current.$$route.params.new) {
-        PublicationsRsrc.queryNew(params, afterFetchPublications);
         $scope.$emit('PublicationsCtrl:newFeedLoaded');
+        return PublicationsRsrc.queryNew(params).$promise;
       } else if ($route.current.$$route.params.lesson) {
         params.lesson = $routeParams.lesson;
-        PublicationsRsrc.queryLesson(params, afterFetchPublications);
+        return PublicationsRsrc.queryLesson(params).$promise;
       }
       else {
-        PublicationsRsrc.query(params, afterFetchPublications);
+        return PublicationsRsrc.query(params).$promise;
       }
     };
 
@@ -44,15 +47,31 @@ angular.module('wisrNgApp')
       PublicationsRsrc.query({offset: 0}, function(data) {
         window.location.href = 'ios://refreshed';
         $scope.publications = [];
-        afterFetchPublications(data)
+        afterFetchPublications([data])
       });
     }
 
     function afterFetchPublications(data) {
-      $scope.publications = $scope.publications.concat(data);
+      var publications = data[0], 
+          correctQuestionIds = data[1], 
+          ratings = data[2];
+
+      $scope.publications = $scope.publications.concat(publications);
       loadingPublications = false;
       dedupePublications();
       emitLesson();
+
+      if (correctQuestionIds) {
+        $timeout(function() {
+          $scope.$broadcast('PublicationsCtrl:correctQIds:loaded', correctQuestionIds);
+        });
+      }
+
+      if (ratings) {
+        $timeout(function() {
+          $scope.$broadcast('PublicationsCtrl:ratings:loaded', ratings);
+        });
+      }
     }
 
     function emitLesson() {
@@ -81,29 +100,13 @@ angular.module('wisrNgApp')
       });
     }
 
-    function loadCorrectAnswers() {
-      if (!$scope.currentUser.id) return;
-
-      CorrectQuestionIdsRsrc.query({currentUserId: $scope.currentUser.id},
-        function(correctQIds) {
-          $scope.correctQIds = correctQIds;
-      });
-    };
-
-    function broadcastCorrectAnswersLoaded() {
-      if (!$scope.correctQIds) return;
-      $timeout(function() {
-        $scope.$broadcast('PublicationsCtrl:correctQIds:loaded', $scope.correctQIds);
-      });
-    };
-
     $scope.loadMore = function() {
       if (loadingPublications) {return;}
       if ($scope.publications.length == 0) {return;}
       if ($route.current.$$route.params.lesson) {return;}
 
       offset += 10;
-      fetchPublications();
+      $q.all([fetchPublications()]).then(afterFetchPublications);
     };
 
     $scope.isInFocus = function(publicationId) {

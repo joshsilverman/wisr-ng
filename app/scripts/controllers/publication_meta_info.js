@@ -13,6 +13,8 @@ angular.module('wisrNgApp')
       setAuthorInfo();
       setCounts();      
       setRating();
+
+      $scope.$on('PublicationsCtrl:ratings:loaded', registerRating);
     }
 
     function setAuthorInfo() { 
@@ -53,10 +55,21 @@ angular.module('wisrNgApp')
     };
 
     function setRating() {
-      $scope.prevRatingScore = 3;
-      $scope.rating = {score: 3};
+      $scope.rating = {score: $scope.publication._question.rating || '0.0'};
+
+
+      $scope.prevRatingScore = $scope.rating.score;
       $scope.$watch('rating.score', changeRating);
     }
+
+    function registerRating(e, ratings) {
+      var rating = _.find(ratings, function(r) {
+        return r.question_id == $scope.publication.question_id;
+      });
+
+      $scope.prevRatingScore = rating.score;
+      $scope.rating = {score: rating.score};
+    };
 
     function changeRating() {
       if ($scope.rating.score == $scope.prevRatingScore) 
