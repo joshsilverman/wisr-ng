@@ -55,7 +55,9 @@ angular.module('wisrNgApp')
     };
 
     function setRating() {
-      $scope.rating = {score: $scope.publication._question.rating || '0.0'};
+      var rating = ($scope.publication && $scope.publication._question) 
+        ? $scope.publication._question.rating : '0.0';
+      $scope.rating = {score: rating};
 
 
       $scope.prevRatingScore = $scope.rating.score;

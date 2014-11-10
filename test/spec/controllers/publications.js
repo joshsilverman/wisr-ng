@@ -16,9 +16,9 @@ describe('Controller: PublicationsCtrl', function () {
     _controller_ = $controller;
 
     _PublicationsRsrc_ = $injector.get('PublicationsRsrc');
-    spyOn(_PublicationsRsrc_, 'query');
-    spyOn(_PublicationsRsrc_, 'queryNew');
-    spyOn(_PublicationsRsrc_, 'queryLesson');
+    spyOn(_PublicationsRsrc_, 'query').andCallFake(function() {return {'$promise': ''}});
+    spyOn(_PublicationsRsrc_, 'queryNew').andCallFake(function() {return {'$promise': ''}});
+    spyOn(_PublicationsRsrc_, 'queryLesson').andCallFake(function() {return {'$promise': ''}});
   }));
 
   it('should query Publications resource and set publications to scope', function () {

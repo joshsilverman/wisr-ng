@@ -46,6 +46,7 @@ module.exports = function(config) {
       "bower_components/angular-moment/angular-moment.js",
       "bower_components/snapjs/snap.js",
       "bower_components/jquery.stellar/jquery.stellar.js",
+      "bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
       ".tmp/scripts/config.js",
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
