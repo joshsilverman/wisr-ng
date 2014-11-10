@@ -24,14 +24,17 @@
     class='rating-container'
     ng-model="rating.score" 
     max="5" 
-    readonly="false" 
+    readonly="!currentUser.id" 
     on-hover="hoveringOver(score)" 
     on-leave="overStar=null"
     state-on="'icon icon-star'" 
     state-off="'icon icon-star-empty'">
   </rating>
   
-  <span class='numeric-rating'>
+  <span 
+    class='numeric-rating'
+    ng-show='publication._question.rating_count'>
+    
     ({{publication._question.rating}}
     from
     {{publication._question.rating_count}} 
