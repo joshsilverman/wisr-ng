@@ -68,6 +68,7 @@ angular.module('wisrNgApp')
       var rating = _.find(ratings, function(r) {
         return r.question_id == $scope.publication.question_id;
       });
+      if (!rating) return;
 
       $scope.prevRatingScore = rating.score;
       $scope.rating = {score: rating.score};

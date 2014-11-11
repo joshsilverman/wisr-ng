@@ -2,7 +2,7 @@
 
 angular.module('wisrNgApp')
   .controller('PublicationsCtrl', function($scope, $q, $timeout, $routeParams, $route, PublicationsRsrc, CorrectQuestionIdsRsrc, RatingsRsrc) {
-    var offset, loadingPublications, asker;
+    var offset, loadingPublications, asker, correctQIds, ratings;
 
     var init = function() {
       $scope.publications = [];
@@ -52,18 +52,18 @@ angular.module('wisrNgApp')
     }
 
     function afterFetchPublications(data) {
-      var publications = data[0], 
-          correctQuestionIds = data[1], 
-          ratings = data[2];
+      var publications = data[0];
+      correctQIds = correctQIds || data[1];
+      ratings = ratings || data[2];
 
       $scope.publications = $scope.publications.concat(publications);
       loadingPublications = false;
       dedupePublications();
       emitLesson();
 
-      if (correctQuestionIds) {
+      if (correctQIds) {
         $timeout(function() {
-          $scope.$broadcast('PublicationsCtrl:correctQIds:loaded', correctQuestionIds);
+          $scope.$broadcast('PublicationsCtrl:correctQIds:loaded', correctQIds);
         });
       }
 
