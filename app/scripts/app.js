@@ -52,6 +52,11 @@ angular
         controller: 'FeedCtrl',
         params: {lesson: true}
       })
+      .when('/:subjectURL/quiz/new', {
+        templateUrl: '/views/quizmaker/new.html',
+        controller: 'QuizmakerCtrl',
+        params: {lesson: true}
+      })
       .otherwise({
         templateUrl: '/views/feed.html',
         controller: 'FeedCtrl'

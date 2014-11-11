@@ -1,0 +1,29 @@
+<div
+  class="header"
+  style="background: {{$parent.silhouetteColor}};"
+  ng-controller='HeaderCtrl'
+  ng-include="'/views/shared/_header.html'"></div>
+
+  <div class="silhouette" style="background: {{bgColor}}; fill: {{silhouetteColor}};">
+    <span ng-bind-html='silhouette'></span><span ng-bind-html='silhouette'></span><span ng-bind-html='silhouette'></span>
+  </div>
+  <div class="topfold">
+    <span class="asker-photo">
+      <img
+        ng-show="questImage"
+        src="{{imageBaseURL}}/{{questImage}}">
+    </span>
+    <div class="title">
+      <h2>Make a quiz for {{currentAsker.subject_url}}</h2>
+    </div>
+  </div>
+
+
+<div
+  class='columns'
+  ngg-controller='PublicationsCtrl'>
+
+  <div
+    ngg-include="'/views/_publications.html'"
+    class="timeline-container"></div>
+</div>
