@@ -17,6 +17,13 @@ angular.module('wisrNgApp')
 
       loadCurrentUser();
       loadAskers();
+      initFirstQuestion();
+    }
+
+    function initFirstQuestion() {
+      $scope.questions = [{
+        
+      }];
     }
 
     function loadCurrentUser() {

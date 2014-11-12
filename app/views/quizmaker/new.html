@@ -20,9 +20,28 @@
 
 <div
   class='columns'
-  ngg-controller='PublicationsCtrl'>
+  ng-controller='PublicationsCtrl'>
 
-  <div
-    ngg-include="'/views/_publications.html'"
-    class="timeline-container"></div>
+  <div class="timeline-container">
+    <ul class="timeline">
+      <li
+        ng-repeat='question in questions'
+        class="feed-publication"
+        style='display:inherit;'>
+
+        <input class="radio" type="radio"></input>
+        <div class="relative">
+          <span class="circle">{{$index + 1}}</span>
+        </div>
+
+        <div class="content">
+          <h3>
+            <span></span>
+          </h3>
+          <div class="answers"></div>
+        </div>
+      </li>
+    </ul>
+
+  </div>
 </div>
