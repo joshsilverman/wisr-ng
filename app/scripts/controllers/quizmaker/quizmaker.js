@@ -31,40 +31,16 @@ angular.module('wisrNgApp')
         $scope.currentAsker = _.find($scope.askers, function(a) {
           return a.subject_url == $routeParams.subjectURL;
         });
-
+        
         configStyles();
       });
     }
 
     function configStyles() {
-      fetchSilhouette(function() {
-        if ($scope.currentAsker) {
-          $scope.bgColor = $scope.currentAsker.styles["bg_color"];
-          $scope.silhouetteColor = $scope.currentAsker.styles["silhouette_color"];
-          $scope.questImage = $scope.currentAsker.styles["quest_image"];
-        }
-        $scope.bgColor = $scope.bgColor || '#202734';
-        $scope.silhouetteColor = $scope.silhouetteColor || '#292935';
-        $scope.questImage = $scope.questImage || "quests/scholar.png";
-      });
+      $scope.bgColor = $scope.currentAsker.styles["bg_color"] || '#202734';
+      $scope.silhouetteColor = $scope.currentAsker.styles["silhouette_color"] || '#292935';
+      $scope.questImage = $scope.currentAsker.styles["quest_image"] || "quests/scholar.png";
 
-      setTitle();
-    }
-
-    function fetchSilhouette(callback) {
-      if ($scope.currentAsker)
-        $scope.silhouetteImage = $scope.currentAsker.styles["silhouette_image"];
-      $scope.silhouetteImage = $scope.silhouetteImage || 'bg_images/nature.svg';
-
-      $http.get(Paths.imageBaseURL + "/" + $scope.silhouetteImage)
-        .success(function(data) {
-          $scope.silhouette = $sce.trustAsHtml(data);
-          callback.call();
-        }
-      );
-    };
-
-    function setTitle() {
       $rootScope.title = "Quiz Maker | Wisr";
     }
 

@@ -1,12 +1,11 @@
 <div
   class="header"
-  style="background: {{$parent.silhouetteColor}};"
+  style="background: {{silhouetteColor}};"
   ng-controller='HeaderCtrl'
   ng-include="'/views/shared/_header.html'"></div>
 
-  <div class="silhouette" style="background: {{bgColor}}; fill: {{silhouetteColor}};">
-    <span ng-bind-html='silhouette'></span><span ng-bind-html='silhouette'></span><span ng-bind-html='silhouette'></span>
-  </div>
+  <wsr-silhouette currentAsker="currentAsker"></wsr-silhouette>
+
   <div class="topfold">
     <span class="asker-photo">
       <img
