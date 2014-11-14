@@ -34,12 +34,10 @@
           <span class="circle">{{$index + 1}}</span>
         </div>
 
-        <div class="content">
-          <h3>
-            <span></span>
-          </h3>
-          <div class="answers"></div>
-        </div>
+        <div
+          ng-include="'/views/quizmaker/_new_question.html'"
+          class="feed-publication new-question"
+          style='display:inherit;'></div>
       </li>
     </ul>
 

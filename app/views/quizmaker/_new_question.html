@@ -1,0 +1,29 @@
+<div class="content">
+  <h3>
+    <span>
+      <input ng-model='question.text' placeholder='Suggest a followup question' />
+    </span>
+  </h3>
+
+  <div class="answers">
+    <div class="answer correct">
+      <span>
+        <input ng-model='correctAnswer.text' placeholder='Correct answer' />
+      </span>
+    </div>
+    <div
+      ng-repeat="incorrectAnswer in incorrectAnswers"
+      class="answer incorrect">
+
+      <span>
+        <input
+          ng-change='updateAnswers()'
+          placeholder='Incorrect answer'
+          ng-model='incorrectAnswer.text' />
+      </span>
+    </div>
+    <div class='answer' ng-click='submit()'>
+      Suggest this question
+    </div>
+  </div>
+</div>

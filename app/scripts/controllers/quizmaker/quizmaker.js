@@ -8,38 +8,39 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('QuizmakerCtrl', function($scope, $routeParams, $http, $sce, $rootScope, Paths, CurrentUser, AskersRsrc, PublicationRsrc, VariantsRsrc) {
+  .controller('QuizmakerCtrl', function($scope, $routeParams, $rootScope, $q, Paths, CurrentUserRsrc, AskersRsrc, QuizRsrc) {
     function init() {
       $scope.assetBasePath = Paths.assets;
       $rootScope.assetBasePath = Paths.assets;
       $scope.imageBaseURL = Paths.imageBaseURL;
       $scope.Paths = Paths;
 
-      loadCurrentUser();
-      loadAskers();
-      initFirstQuestion();
+      $q.all([
+          CurrentUserRsrc.get().$promise,
+          AskersRsrc.query().$promise])
+        .then(afterLoadUsers);
     }
 
-    function initFirstQuestion() {
-      $scope.questions = [{
-        
-      }];
+    function afterLoadUsers(data) {
+      $scope.currentUser = data[0];
+      setCurrentAsker(data[1]);
+      configStyles();
+
+      findOrCreateQuiz()
     }
 
-    function loadCurrentUser() {
-      CurrentUser(function(_currentUser) {
-        $scope.currentUser = _currentUser;
+    function findOrCreateQuiz() {
+      QuizRsrc.save({
+        asker_id: $scope.currentAsker.id, 
+        name: 'untitled',
+        type_id: 6
       });
     }
 
-    function loadAskers() {
-      AskersRsrc.query().$promise.then(function(_askers) {
-        $scope.askers = _askers;
-        $scope.currentAsker = _.find($scope.askers, function(a) {
-          return a.subject_url == $routeParams.subjectURL;
-        });
-        
-        configStyles();
+    function setCurrentAsker(_askers) {
+      $scope.askers = _askers;
+      $scope.currentAsker = _.find($scope.askers, function(a) {
+        return a.subject_url == $routeParams.subjectURL;
       });
     }
 
