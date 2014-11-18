@@ -55,7 +55,12 @@ angular
       .when('/:subjectURL/quiz/new', {
         templateUrl: '/views/quizmaker/new.html',
         controller: 'QuizmakerCtrl',
-        params: {lesson: true}
+        params: {'new': true}
+      })
+      .when('/:subjectURL/quiz/:id', {
+        templateUrl: '/views/quizmaker/new.html',
+        controller: 'QuizmakerCtrl',
+        params: {edit: true}
       })
       .otherwise({
         templateUrl: '/views/feed.html',

@@ -8,20 +8,27 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('LessonsCtrl', function ($scope, $rootScope, $location, Paths, LessonsRsrc, LessonAnswerCountsRsrc) {
-    var currentAsker;
-
-    var init = function() {
-      $scope.$on('FeedCtrl:fetchedCurrentAsker', function(e, _currentAsker) {
-        currentAsker = _currentAsker;
+  .controller('LessonsCtrl', function ($scope, $rootScope, $location, $routeParams, Paths, LessonsRsrc, AskersRsrc, LessonAnswerCountsRsrc) {
+    function init() {
+      fetchCurrentAsker(function() {
         loadLessonCounts();
       });
 
       $rootScope.$on('AnswerCtrl:correct', updateAnsweredCounts);
     };
 
-    var loadLessonCounts = function() {
-      LessonsRsrc.get({asker_id: currentAsker.id}, function(data) {
+    function fetchCurrentAsker(callback) {
+      AskersRsrc.query().$promise.then(function(_askers) {
+        $scope.currentAsker = _.find($scope.askers, function(a) {
+          return a.subject_url == $routeParams.subjectURL;
+        });
+
+        callback.call();
+      });
+    }
+
+    function loadLessonCounts() {
+      LessonsRsrc.get({asker_id: $scope.currentAsker.id}, function(data) {
         $scope.lessons = data.topics;
         $scope.subject_url = data.meta.subject_url;
       });
@@ -29,7 +36,7 @@ angular.module('wisrNgApp')
       updateAnsweredCounts();
     }
 
-    var updateAnsweredCounts = function() {
+    function updateAnsweredCounts() {
       LessonAnswerCountsRsrc.get({}, function(data) {
         $scope.lessonCounts = data;
       });
