@@ -15,7 +15,6 @@ angular.module('wisrNgApp')
       $scope.imageBaseURL = Paths.imageBaseURL;
       $scope.Paths = Paths;
 
-      console.log('init');
       $q.all([
           CurrentUserRsrc.get().$promise,
           AskersRsrc.query().$promise])
@@ -48,14 +47,13 @@ angular.module('wisrNgApp')
       $location.path(url).replace();
     }
 
-    function loadQuizData() {
+    function loadQuizData(questions) {
+      $scope.questions = questions;
       $scope.title = {text: 'Untitled'};
       $scope.$watch('title.text', _.throttle(onTitleUpdated, 1500));
     }
 
     function onTitleUpdated(title) {
-      // debugger;
-      // QuizRsrc.save({id: })
     }
 
     function setCurrentAsker(_askers) {
