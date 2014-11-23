@@ -8,7 +8,7 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('QuizmakerCtrl', function($scope, $routeParams, $rootScope, $q, $location, Paths, CurrentUserRsrc, AskersRsrc, QuizRsrc) {
+  .controller('QuizmakerCtrl', function($scope, $routeParams, $rootScope, $q, $location, Paths, CurrentUserRsrc, AskersRsrc, LessonRsrc) {
     function init() {
       $scope.assetBasePath = Paths.assets;
       $rootScope.assetBasePath = Paths.assets;
@@ -31,9 +31,9 @@ angular.module('wisrNgApp')
 
     function findOrCreateQuiz() {
       if ($routeParams.id) {
-        QuizRsrc.get({id: $routeParams.id}).$promise.then(loadQuizData);
+        LessonRsrc.get({id: $routeParams.id}).$promise.then(loadQuizData);
       } else {
-        QuizRsrc.save({
+        LessonRsrc.save({
           asker_id: $scope.currentAsker.id, 
           name: 'untitled',
           type_id: 6
@@ -42,13 +42,13 @@ angular.module('wisrNgApp')
     }
 
     function navToQuiz(quiz) {
-      $scope.quiz = quiz;
       var url = ['', $scope.currentAsker.subject_url, 'quiz', quiz.id].join('/');
+      $scope.quiz = quiz;
       $location.path(url).replace();
     }
 
     function loadQuizData(questions) {
-      $scope.quiz = new QuizRsrc(questions[0]._lesson);
+      $scope.quiz = new LessonRsrc(questions[0]._lesson);
       $scope.questions = questions;
       $scope.$watch('quiz.name', _.throttle(onNameUpdated, 2000));
     }
