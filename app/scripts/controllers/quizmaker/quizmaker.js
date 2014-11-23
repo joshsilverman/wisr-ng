@@ -9,6 +9,8 @@
  */
 angular.module('wisrNgApp')
   .controller('QuizmakerCtrl', function($scope, $routeParams, $rootScope, $q, $location, Paths, CurrentUserRsrc, AskersRsrc, QuizRsrc) {
+    var quiz;
+
     function init() {
       $scope.assetBasePath = Paths.assets;
       $rootScope.assetBasePath = Paths.assets;
@@ -48,12 +50,16 @@ angular.module('wisrNgApp')
     }
 
     function loadQuizData(questions) {
+      quiz = new QuizRsrc(questions[0]._lesson);
+
       $scope.questions = questions;
       $scope.title = {text: 'Untitled'};
-      $scope.$watch('title.text', _.throttle(onTitleUpdated, 1500));
+      $scope.$watch('title.text', _.throttle(onTitleUpdated, 2000));
     }
 
     function onTitleUpdated(title) {
+      quiz.name = title;
+      quiz.$update({id: quiz.id});
     }
 
     function setCurrentAsker(_askers) {
