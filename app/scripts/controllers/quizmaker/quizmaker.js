@@ -47,9 +47,9 @@ angular.module('wisrNgApp')
       $location.path(url).replace();
     }
 
-    function loadQuizData(questions) {
-      $scope.quiz = new LessonRsrc(questions[0]._lesson);
-      $scope.questions = questions;
+    function loadQuizData(lessonItems) {
+      $scope.quiz = new LessonRsrc(lessonItems[0]._lesson);
+      $scope.lessonItems = lessonItems;
       $scope.$watch('quiz.name', _.throttle(onNameUpdated, 2000));
     }
 

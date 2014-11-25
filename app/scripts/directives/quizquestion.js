@@ -12,23 +12,29 @@ angular.module('wisrNgApp')
 
     function link(_scope, element, attrs) {
       scope = _scope;
-      // console.log(scope.question);
-      // console.log(scope.question['_answers']);
       assignAnswers();
+      assignQuestion();
+    }
+
+    function assignQuestion() {
+      if (!scope.lessonItem) return;
+
+
+      scope.question = scope.lessonItem['_question'];
     }
 
     function assignAnswers() {
-      if (!scope.question || !scope.question['_answers']) return;
+      if (!scope.lessonItem || !scope.lessonItem['_answers']) return;
 
-      var correctAnswerId = scope.question['_question'].correct_answer_id;
+      var correctAnswerId = scope.lessonItem['_question'].correct_answer_id;
       if (correctAnswerId) {
         scope.correctAnswer = {
-          text: scope.question['_answers'][correctAnswerId]
+          text: scope.lessonItem['_answers'][correctAnswerId]
         };
       }
 
       scope.incorrectAnswers = [];
-      _.each(scope.question['_answers'], function(questionText, id) {
+      _.each(scope.lessonItem['_answers'], function(questionText, id) {
         if (id == correctAnswerId) return;
 
         scope.incorrectAnswers.push({
@@ -43,11 +49,12 @@ angular.module('wisrNgApp')
       restrict: 'E',
       scope: {
         question: '=',
+        lessonItem: '=',
         correctAnswer: '=',
         incorrectAnswers: '='
       },
       link: function(_scope, element, attrs) {
-        _scope.$watch('question', function() {
+        _scope.$watch('lessonItem', function() {
           link(_scope, element, attrs);          
         });
 

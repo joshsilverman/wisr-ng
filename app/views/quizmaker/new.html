@@ -26,7 +26,7 @@
   <div class="timeline-container">
     <ul class="timeline">
       <li
-        ng-repeat='question in questions'
+        ng-repeat='lessonItem in lessonItems'
         class="feed-publication"
         style='display:inherit;'>
 
@@ -35,8 +35,11 @@
           <span class="circle">{{$index + 1}}</span>
         </div>
 
-        <quizquestion 
-          question='question'>
+        <quizquestion
+          question="question"
+          lesson-item="lessonItem"
+          correct-answer="correctAnswer"
+          incorrect-answers="incorrectAnswers">
         </quizquestion>
       </li>
     </ul>

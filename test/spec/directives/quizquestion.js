@@ -8,7 +8,7 @@ describe('Directive: quizquestion', function () {
 
   var element,
     scope,
-    question = {
+    lessonItem = {
       "question_id":3787,
       "asker_id":18,
       "_answers": {
@@ -41,6 +41,7 @@ describe('Directive: quizquestion', function () {
 
   var directiveInvocation = '\
     <quizquestion \
+      lesson-item="lessonItem" \
       question="question" \
       correct-answer="correctAnswer" \
       incorrect-answers="incorrectAnswers"></quizquestion>';
@@ -53,16 +54,25 @@ describe('Directive: quizquestion', function () {
   it('should assign correctAnswer', inject(function ($compile) {
     element = angular.element(directiveInvocation);
     element = $compile(element)(scope);
-    scope.question = question;
+    scope.lessonItem = lessonItem;
     scope.$digest();
     expect(scope.correctAnswer).toBeDefined();
   }));
 
   it('should assign incorrectAnswers', inject(function ($compile) {
     element = angular.element(directiveInvocation);
-    scope.question = question;
+    scope.lessonItem = lessonItem;
     element = $compile(element)(scope);
     scope.$digest();
     expect(scope.incorrectAnswers).toBeDefined();
+  }));
+
+  it('should assign question', inject(function ($compile) {
+    element = angular.element(directiveInvocation);
+    scope.lessonItem = lessonItem;
+    element = $compile(element)(scope);
+    scope.$digest();
+    expect(scope.question).toBeDefined();
+    expect(scope.question.text).toBeDefined();
   }));
 });
