@@ -7,6 +7,10 @@ module.exports = function(config) {
   'use strict';
 
   config.set({
+    preprocessors: {
+      'app/**/*.html': ['ng-html2js']
+    },
+
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
@@ -50,7 +54,8 @@ module.exports = function(config) {
       ".tmp/scripts/config.js",
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
-      'test/spec/**/*.js'
+      'test/spec/**/*.js',
+      'app/**/*.html'
     ],
 
     // list of files / patterns to exclude
@@ -74,7 +79,8 @@ module.exports = function(config) {
     // Which plugins to enable
     plugins: [
       'karma-phantomjs-launcher',
-      'karma-jasmine'
+      'karma-jasmine',
+      'karma-ng-html2js-preprocessor'
     ],
 
     // Continuous Integration mode
@@ -93,5 +99,9 @@ module.exports = function(config) {
     // },
     // URL root prevent conflicts with the site root
     // urlRoot: '_karma_'
+
+    ngHtml2JsPreprocessor: {
+      stripPrefix: 'app'
+    }
   });
 };

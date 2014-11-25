@@ -4,6 +4,7 @@ describe('Directive: quizquestion', function () {
 
   // load the directive's module
   beforeEach(module('wisrNgApp'));
+  beforeEach(module('/views/quizmaker/_new_question.html'));
 
   var element,
     scope,
