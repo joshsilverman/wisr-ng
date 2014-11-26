@@ -57,6 +57,7 @@ describe('Directive: quizquestion', function () {
     scope.lessonItem = lessonItem;
     scope.$digest();
     expect(scope.correctAnswer).toBeDefined();
+    expect(scope.correctAnswer.text).toBeDefined();
   }));
 
   it('should assign incorrectAnswers', inject(function ($compile) {
@@ -65,6 +66,7 @@ describe('Directive: quizquestion', function () {
     element = $compile(element)(scope);
     scope.$digest();
     expect(scope.incorrectAnswers).toBeDefined();
+    expect(scope.incorrectAnswers[0].text).toBeDefined();
   }));
 
   it('should assign question', inject(function ($compile) {
