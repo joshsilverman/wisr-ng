@@ -26,7 +26,7 @@
   <div class="timeline-container">
     <ul class="timeline">
       <li
-        ng-repeat='lessonItem in lessonItems'
+        ng-repeat='lessonItem in lessonItems | orderBy : "created_at"'
         class="feed-publication"
         style='display:inherit;'>
 
@@ -43,6 +43,7 @@
         </quizquestion>
       </li>
     </ul>
+    <a ng-click='addQuestion()'>New Question</a>
 
   </div>
 </div>

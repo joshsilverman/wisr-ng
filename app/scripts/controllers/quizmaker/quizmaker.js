@@ -8,7 +8,7 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('QuizmakerCtrl', function($scope, $routeParams, $rootScope, $q, $location, Paths, CurrentUserRsrc, AskersRsrc, LessonRsrc) {
+  .controller('QuizmakerCtrl', function($scope, $routeParams, $rootScope, $q, $location, Paths, CurrentUserRsrc, AskersRsrc, LessonRsrc, QuestionRsrc) {
     function init() {
       $scope.assetBasePath = Paths.assets;
       $rootScope.assetBasePath = Paths.assets;
@@ -52,6 +52,15 @@ angular.module('wisrNgApp')
       $scope.lessonItems = lessonItems;
       $scope.$watch('quiz.name', _.throttle(onNameUpdated, 2000));
     }
+
+    $scope.addQuestion = function() {
+      new QuestionRsrc({
+          asker_id:$scope.quiz.asker_id,
+          lesson_id:$scope.quiz.id
+        }).$save().then(function(questionAsPublication) {
+          $scope.lessonItems.push(questionAsPublication);
+        });
+    };
 
     function onNameUpdated() {
       $scope.quiz.$update({id: $scope.quiz.id});
