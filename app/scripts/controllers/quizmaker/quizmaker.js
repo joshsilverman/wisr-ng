@@ -50,7 +50,7 @@ angular.module('wisrNgApp')
     function loadQuizData(lessonItems) {
       $scope.quiz = new LessonRsrc(lessonItems[0]._lesson);
       $scope.lessonItems = lessonItems;
-      $scope.$watch('quiz.name', _.throttle(onNameUpdated, 2000));
+      $scope.$watch('quiz.name', _.debounce(onNameUpdated, 1500));
     }
 
     $scope.addQuestion = function() {

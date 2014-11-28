@@ -24,12 +24,15 @@ angular.module('wisrNgApp')
 
       scope.question = new QuestionRsrc(scope.lessonItem['_question']);
 
-      var prevText = scope.question.text;
+      // @strange that this had to go on the scope and could
+      // not be put in this context and pulled in via the closure
+      scope.prevQuestionText = scope.question.text;
       scope.$watch('question.text', _.debounce(function() {
-        if (prevText == scope.question.text) return;
-        else prevText = scope.question.text;
+        if (scope.prevQuestionText == scope.question.text) return;
+        else scope.prevQuestionText = scope.question.text;
 
         scope.question.$update({id: scope.question.id});
+        console.log('update question');
       }, debounceLimit));
     }
 
@@ -45,12 +48,13 @@ angular.module('wisrNgApp')
         });
       }
 
-      var prevText = scope.correctAnswer.text;
+      scope.prevCorrectAnswerText = scope.correctAnswer.text;
       scope.$watch('correctAnswer.text', _.debounce(function() {
-        if (prevText == scope.correctAnswer.text) return;
-        else prevText = scope.correctAnswer.text;
+        if (scope.prevCorrectAnswerText == scope.correctAnswer.text) return;
+        else scope.prevCorrectAnswerText = scope.correctAnswer.text;
 
         scope.correctAnswer.$update({id: scope.correctAnswer.id});
+        console.log('update correct answer');
       }, debounceLimit));
     }
 
@@ -59,7 +63,7 @@ angular.module('wisrNgApp')
       scope.incorrectAnswers = [];
       _.each(scope.lessonItem['_answers'], function(questionText, id) {
         if (id == scope.correctAnswerId) return;
-
+        var k = i; // create a var local to this context to get pulled in
         var answer = new AnswerRsrc({
           id: id,
           text: questionText
@@ -67,11 +71,12 @@ angular.module('wisrNgApp')
 
         scope.incorrectAnswers.push(answer);
 
-        var prevText = answer.text;
-        var watchExp = ['incorrectAnswers[', i , '].text'].join('');
+        scope.prevIncorrectAnswerText = scope.prevIncorrectAnswerText || {};
+        scope.prevIncorrectAnswerText[k] = answer.text;
+        var watchExp = ['incorrectAnswers[', k , '].text'].join('');
         scope.$watch(watchExp, _.debounce(function() {
-          if (prevText == answer.text) return;
-          else prevText = answer.text;
+          if (scope.prevIncorrectAnswerText[k] == answer.text) return;
+          else scope.prevIncorrectAnswerText[k] = answer.text;
 
           answer.$update({id: answer.id});
         }, debounceLimit));
