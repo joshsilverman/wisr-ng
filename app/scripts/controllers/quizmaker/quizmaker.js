@@ -50,7 +50,7 @@ angular.module('wisrNgApp')
     function loadQuizData(lessonItems) {
       $scope.quiz = new LessonRsrc(lessonItems[0]._lesson);
       $scope.lessonItems = lessonItems;
-      $scope.$watch('quiz.name', _.debounce(onNameUpdated, 1500));
+      watchQuizForChanges();
     }
 
     $scope.addQuestion = function() {
@@ -62,8 +62,14 @@ angular.module('wisrNgApp')
         });
     };
 
-    function onNameUpdated() {
-      $scope.quiz.$update({id: $scope.quiz.id});
+    function watchQuizForChanges() {
+      var prevText = $scope.quiz.name;
+      $scope.$watch('quiz.name', _.debounce(function() {
+        if (prevText == $scope.quiz.name) return;
+        else prevText = $scope.quiz.name;
+
+        $scope.quiz.$update({id: $scope.quiz.id});
+      }, 1500));
     }
 
     function setCurrentAsker(_askers) {
