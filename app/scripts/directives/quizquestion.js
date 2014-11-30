@@ -16,6 +16,8 @@ angular.module('wisrNgApp')
       assignQuestion(scope);
 
       scope.addAnswer = function(question_id) {
+        if (scope.incorrectAnswers.length >= 3) return;
+
         var answer = new AnswerRsrc({
           correct: false,
           question_id: question_id
@@ -102,12 +104,12 @@ angular.module('wisrNgApp')
         correctAnswer: '=',
         incorrectAnswers: '='
       },
-      link: function(scope, element, attrs) {
-        scope.$watch('lessonItem', function() {
-          link(scope, element, attrs);          
+      link: function(_scope, element, attrs) {
+        _scope.$watch('lessonItem', function() {
+          link(_scope, element, attrs);          
         });
 
-        link(scope, element, attrs);
+        link(_scope, element, attrs);
       }
     };
   });

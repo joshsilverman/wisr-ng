@@ -83,17 +83,40 @@ describe('Directive: quizquestion#addAnswer', function () {
   beforeEach(module('wisrNgApp'));
   beforeEach(module('/views/quizmaker/_new_question.html'));
 
-  beforeEach(inject(function ($rootScope, $httpBackend) {
+  beforeEach(inject(function ($rootScope, $compile, $httpBackend) {
     scope = $rootScope.$new();
-  }));
 
-  it('should add another answer after clicking add answer', inject(function ($compile) {
+    $httpBackend.when('POST', 'http://dev.localhost/answers.json').respond({
+      id: 123,
+      text: ''
+    });
+
     element = angular.element(directiveInvocation);
     scope.lessonItem = lessonItem;
     element = $compile(element)(scope);
     scope.$digest();
+  }));
+
+  it('should add another answer after clicking add answer', inject(function ($compile, $httpBackend) {
     expect(scope.incorrectAnswers.length).toEqual(2);
-    scope.addAnswer();
+
+    var addAnsElmnt = angular.element($(element).find('.add-answer')[0])
+    addAnsElmnt.triggerHandler('click');
+
+    $httpBackend.flush();
     expect(scope.incorrectAnswers.length).toEqual(3);
+  }));
+
+  it('wont add more than 3 incorrect answers', inject(function ($compile, $httpBackend) {
+    expect(scope.incorrectAnswers.length).toEqual(2);
+
+    var addAnsElmnt = angular.element($(element).find('.add-answer')[0])
+    
+    addAnsElmnt.triggerHandler('click');
+    $httpBackend.flush();
+    expect(scope.incorrectAnswers.length).toEqual(3);
+
+    addAnsElmnt.triggerHandler('click');
+    $httpBackend.verifyNoOutstandingRequest();
   }));
 });
