@@ -22,7 +22,11 @@
           ng-model='incorrectAnswer.text' />
       </span>
     </div>
-    <div class='answer incorrect add-answer' ng-click='addAnswer(question.id)'>
+    <div 
+      class='answer incorrect add-answer' 
+      ng-click='addAnswer(question.id)'
+      ng-hide='incorrectAnswers.length > 2'>
+
       Add another answer
     </div>
   </div>

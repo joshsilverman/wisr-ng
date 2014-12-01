@@ -116,6 +116,7 @@ describe('Directive: quizquestion#addAnswer', function () {
     $httpBackend.flush();
     expect(scope.incorrectAnswers.length).toEqual(3);
 
+    expect($(element).find('.add-answer.ng-hide').length).toEqual(1);
     addAnsElmnt.triggerHandler('click');
     $httpBackend.verifyNoOutstandingRequest();
   }));
