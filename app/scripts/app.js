@@ -53,12 +53,12 @@ angular
         params: {lesson: true}
       })
       .when('/:subjectURL/quiz/new', {
-        templateUrl: '/views/quizmaker/new.html',
+        templateUrl: '/scripts/components/quizmaker/new.html',
         controller: 'QuizmakerCtrl',
         params: {'new': true}
       })
       .when('/:subjectURL/quiz/:id', {
-        templateUrl: '/views/quizmaker/new.html',
+        templateUrl: '/scripts/components/quizmaker/new.html',
         controller: 'QuizmakerCtrl',
         params: {edit: true}
       })

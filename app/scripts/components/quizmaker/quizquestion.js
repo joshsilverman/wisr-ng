@@ -96,7 +96,7 @@ angular.module('wisrNgApp')
     }
 
     return {
-      templateUrl: '/views/quizmaker/_new_question.html',
+      templateUrl: '/scripts/components/quizmaker/_new_question.html',
       restrict: 'E',
       scope: {
         question: '=',
