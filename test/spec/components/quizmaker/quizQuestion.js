@@ -39,7 +39,7 @@ var directiveInvocation = '\
     correct-answer="correctAnswer" \
     incorrect-answers="incorrectAnswers"></quiz-question>';
 
-describe('Directive: quizQuestionDir', function () {
+describe('Directive: quizQuestion', function () {
 
   // load the directive's module
   beforeEach(module('wisrNgApp'));
@@ -77,7 +77,7 @@ describe('Directive: quizQuestionDir', function () {
   }));
 });
 
-describe('Directive: quizQuestionDir#addAnswer', function () {
+describe('Directive: quizQuestion#addAnswer', function () {
 
   // load the directive's module
   beforeEach(module('wisrNgApp'));
