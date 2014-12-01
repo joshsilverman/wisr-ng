@@ -7,7 +7,7 @@
  * # quizquestion
  */
 angular.module('wisrNgApp')
-  .directive('quizquestion', function (QuestionRsrc, AnswerRsrc) {
+  .directive('quizQuestion', function (QuestionRsrc, AnswerRsrc) {
     var debounceLimit = 1500;
 
     function link(scope, element, attrs) {

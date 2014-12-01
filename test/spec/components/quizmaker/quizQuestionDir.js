@@ -33,13 +33,13 @@ var element,
     "created_at":"2012-09-20T22:44:00.980Z"};
 
 var directiveInvocation = '\
-  <quizquestion \
+  <quiz-question \
     lesson-item="lessonItem" \
     question="question" \
     correct-answer="correctAnswer" \
-    incorrect-answers="incorrectAnswers"></quizquestion>';
+    incorrect-answers="incorrectAnswers"></quiz-question>';
 
-describe('Directive: quizquestion', function () {
+describe('Directive: quizQuestionDir', function () {
 
   // load the directive's module
   beforeEach(module('wisrNgApp'));
@@ -77,7 +77,7 @@ describe('Directive: quizquestion', function () {
   }));
 });
 
-describe('Directive: quizquestion#addAnswer', function () {
+describe('Directive: quizQuestionDir#addAnswer', function () {
 
   // load the directive's module
   beforeEach(module('wisrNgApp'));
