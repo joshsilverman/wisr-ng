@@ -1,4 +1,8 @@
 <div class="title">
   <h2>Make a quiz for {{currentAsker.subject_url}}</h2>
-  <input ng-model='quiz.name'></input>
+  <input 
+    ng-model='quiz.name'></input>
+  <input type="checkbox"
+    ng-model="quiz.published"
+    ng-change="updatePublished()"></input>
 </div>

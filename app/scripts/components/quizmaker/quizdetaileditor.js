@@ -12,6 +12,7 @@ angular.module('wisrNgApp')
 
     function init(scope, element, attrs) {
       $scope = scope;
+      $scope.updatePublished = updatePublished;
 
       if ($scope.quiz && $scope.currentAsker) {
         watchQuizForChanges();
@@ -26,6 +27,10 @@ angular.module('wisrNgApp')
 
         $scope.quiz.$update({id: $scope.quiz.id});
       }, 1000));
+    }
+
+    function updatePublished() {
+      $scope.quiz.$update({id: $scope.quiz.id});
     }
 
     return {
