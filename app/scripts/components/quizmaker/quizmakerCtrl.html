@@ -6,18 +6,6 @@
 
   <wsr-silhouette currentAsker="currentAsker"></wsr-silhouette>
 
-  <div class="topfold">
-    <span class="asker-photo">
-      <img
-        ng-show="questImage"
-        src="{{imageBaseURL}}/{{questImage}}">
-    </span>
-
-    <quiz-detail-editor 
-      quiz="quiz"
-      current-asker="currentAsker">
-    </quiz-detail-editor>
-  </div>
 
 
 <div
@@ -26,6 +14,12 @@
 
   <div class="timeline-container">
     <ul class="timeline">
+      <quiz-detail-editor 
+        class="quiz-detail-editor"
+        quiz="quiz"
+        current-asker="currentAsker">
+      </quiz-detail-editor>
+
       <li
         ng-repeat='lessonItem in lessonItems | orderBy : "created_at"'
         class="feed-publication"
