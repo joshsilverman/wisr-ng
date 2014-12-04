@@ -30,7 +30,12 @@ angular.module('wisrNgApp')
     }
 
     function updatePublished() {
-      $scope.quiz.$update({id: $scope.quiz.id});
+      $scope.updatingPublished = true;
+      $scope.quiz.published = !$scope.quiz.published;
+
+      $scope.quiz.$update({id: $scope.quiz.id}).then(function() {
+        $scope.updatingPublished = false;
+      });
     }
 
     return {
