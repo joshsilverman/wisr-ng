@@ -5,6 +5,10 @@ angular.module('wisrNgApp').factory('QuestionRsrc', function($resource, Paths) {
       update: {
         url: Paths.apiURL + '/questions/:id.json',
         method: 'PUT'
+      },
+      delete: {
+        url: Paths.apiURL + '/questions/:id.json',
+        method: 'DELETE'
       }
     });
   }

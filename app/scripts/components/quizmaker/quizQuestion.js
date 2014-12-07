@@ -28,8 +28,11 @@ angular.module('wisrNgApp')
         });
       };
 
-      scope.remove = function() {
-        console.log('remove');
+      scope.delete = function() {
+        var confirmMsg = 'Are you sure you want to delete this question?';
+        if (!confirm(confirmMsg)) return;
+
+        scope.question.$delete({id: scope.question.id});
       }
     }
 
@@ -43,6 +46,7 @@ angular.module('wisrNgApp')
       // not be put in this context and pulled in via the closure
       scope.prevQuestionText = scope.question.text;
       scope.$watch('question.text', _.debounce(function() {
+        if (!scope.question.id) return;
         if (scope.prevQuestionText == scope.question.text) return;
         else scope.prevQuestionText = scope.question.text;
 

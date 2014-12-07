@@ -23,7 +23,8 @@
       <li
         ng-repeat='lessonItem in lessonItems | orderBy : "created_at"'
         class="feed-publication"
-        style='display:inherit;'>
+        style='display:inherit;'
+        ng-show="question.id">
 
         <input class="radio" type="radio"></input>
         <div class="relative">
