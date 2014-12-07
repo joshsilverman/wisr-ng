@@ -27,6 +27,10 @@ angular.module('wisrNgApp')
           listenToIncorrectAnswerChange(answer, scope);
         });
       };
+
+      scope.remove = function() {
+        console.log('remove');
+      }
     }
 
     function assignQuestion(scope) {
