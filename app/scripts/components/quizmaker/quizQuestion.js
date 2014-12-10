@@ -28,11 +28,24 @@ angular.module('wisrNgApp')
         });
       };
 
-      scope.delete = function() {
+      scope.deleteQuestion = function() {
         var confirmMsg = 'Are you sure you want to delete this question?';
         if (!confirm(confirmMsg)) return;
 
         scope.question.$delete({id: scope.question.id});
+      }
+
+      scope.deleteAnswer = function(id) {
+        var confirmMsg = 'Are you sure you want to delete this answer?';
+        if (!confirm(confirmMsg)) return;
+
+        var answer = _.filter(scope.incorrectAnswers,function(answer){
+          return answer.id == parseInt(id)
+        })[0]
+
+        if (answer) {
+          answer.$delete({id: answer.id});
+        }
       }
     }
 
@@ -96,6 +109,7 @@ angular.module('wisrNgApp')
       scope.prevIncorrectAnswerText[k] = answer.text;
       var watchExp = ['incorrectAnswers[', k , '].text'].join('');
       scope.$watch(watchExp, _.debounce(function() {
+        if (!answer.id) return;
         if (scope.prevIncorrectAnswerText[k] == answer.text) return;
         else scope.prevIncorrectAnswerText[k] = answer.text;
 

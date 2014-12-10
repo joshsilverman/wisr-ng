@@ -13,14 +13,17 @@
     </div>
     <div
       ng-repeat="incorrectAnswer in incorrectAnswers"
-      class="answer incorrect">
+      class="answer incorrect"
+      ng-show="incorrectAnswer.id">
 
       <span>
         <input
           ng-change='updateAnswers()'
           placeholder='Incorrect answer'
           ng-model='incorrectAnswer.text' />
-        <span class='delete-answer'>&#10006;</span>
+        <span 
+          class='delete-answer'
+          ng-click='deleteAnswer(incorrectAnswer.id)'>&#10006;</span>
       </span>
     </div>
     <div 
@@ -35,7 +38,7 @@
 
 <div class='meta-info meta-info-present'>
   <div class='byline'>
-    <a ng-click='delete()'>
+    <a ng-click='deleteQuestion()'>
       Remove
     </a>
   </div>
