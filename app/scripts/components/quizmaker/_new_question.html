@@ -1,7 +1,9 @@
 <div class="content">
   <h3>
     <span>
-      <input ng-model='question.text' placeholder='Suggest a followup question' />
+      <input
+        ng-model='question.text' 
+        placeholder='Suggest a followup question' />
     </span>
   </h3>
 
@@ -41,5 +43,6 @@
     <a ng-click='deleteQuestion()'>
       Remove
     </a>
+    <em class='status' ng-show='saving'>saving</em>
   </div>
 </div>
