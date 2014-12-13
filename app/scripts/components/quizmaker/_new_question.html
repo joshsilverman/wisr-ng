@@ -2,7 +2,7 @@
   <h3>
     <span>
       <input
-        ng-model='question.text' 
+        ng-model='displayQuestion.text' 
         placeholder='Suggest a followup question' />
     </span>
   </h3>
@@ -10,11 +10,11 @@
   <div class="answers">
     <div class="answer correct">
       <span>
-        <input ng-model='correctAnswer.text' placeholder='Correct answer' />
+        <input ng-model='displayCorrectAnswer.text' placeholder='Correct answer' />
       </span>
     </div>
     <div
-      ng-repeat="incorrectAnswer in incorrectAnswers"
+      ng-repeat="incorrectAnswer in displayIncorrectAnswers"
       class="answer incorrect"
       ng-show="incorrectAnswer.id">
 
