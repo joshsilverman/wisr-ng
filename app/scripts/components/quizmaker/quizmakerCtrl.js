@@ -8,13 +8,8 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('QuizmakerCtrl', function($scope, $routeParams, $rootScope, $q, $location, Paths, CurrentUserRsrc, AskersRsrc, LessonRsrc, QuestionRsrc) {
+  .controller('QuizmakerCtrl', function($scope, $routeParams, $rootScope, $q, $location, CurrentUserRsrc, AskersRsrc, LessonRsrc, QuestionRsrc) {
     function init() {
-      $scope.assetBasePath = Paths.assets;
-      $rootScope.assetBasePath = Paths.assets;
-      $scope.imageBaseURL = Paths.imageBaseURL;
-      $scope.Paths = Paths;
-
       $q.all([
           CurrentUserRsrc.get().$promise,
           AskersRsrc.query().$promise])

@@ -7,7 +7,7 @@
 </div>
 
 <a
-  ng-show='$parent.authenticated'
+  ng-show='authenticated'
   class="sign-out"
   ng-href='{{Paths.apiURL}}/users/sign_out'
   rel="nofollow">
@@ -19,7 +19,7 @@
 
 <div
   class="sign-in"
-  ng-show='!$parent.authenticated'>
+  ng-show='!authenticated'>
 
   <a
     class="auth_link nav-link"
