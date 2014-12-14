@@ -8,16 +8,22 @@
  * Controller of the wisrNgApp
  */
 angular.module('wisrNgApp')
-  .controller('QuizmakerCtrl', function($scope, $routeParams, $rootScope, $q, $location, CurrentUserRsrc, AskersRsrc, LessonRsrc, QuestionRsrc) {
+  .controller('QuizmakerCtrl', function($scope, $routeParams, $rootScope, $q, $location, CurrentUserRsrc, AskersRsrc, LessonRsrc, QuestionRsrc, Paths) {
     function init() {
       $q.all([
           CurrentUserRsrc.get().$promise,
           AskersRsrc.query().$promise])
-        .then(afterLoadUsers);
+        .then(onLoadUsersSuccess, onLoadUsersFailure);
     }
 
-    function afterLoadUsers(data) {
+    function onLoadUsersFailure() {
+      var url = [Paths.apiURL, '/users/sign_in'].join('');
+      location.href = url;
+    }
+
+    function onLoadUsersSuccess(data) {
       $scope.currentUser = data[0];
+      authenticate();
       setCurrentAsker(data[1]);
       configStyles();
 
