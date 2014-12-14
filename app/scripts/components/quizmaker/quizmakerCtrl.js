@@ -23,7 +23,6 @@ angular.module('wisrNgApp')
 
     function onLoadUsersSuccess(data) {
       $scope.currentUser = data[0];
-      authenticate();
       setCurrentAsker(data[1]);
       configStyles();
 

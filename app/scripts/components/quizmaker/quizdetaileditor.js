@@ -15,18 +15,23 @@ angular.module('wisrNgApp')
       $scope.updatePublished = updatePublished;
 
       if ($scope.quiz && $scope.currentAsker) {
+        $scope.displayQuiz = {name: $scope.quiz.name};
         watchQuizForChanges();
       }
     }
 
     function watchQuizForChanges() {
       var prevText = $scope.quiz.name;
-      $scope.$watch('quiz.name', _.debounce(function() {
-        if (prevText == $scope.quiz.name) return;
-        else prevText = $scope.quiz.name;
+      $scope.$watch('displayQuiz.name', _.debounce(function() {
+        if (prevText == $scope.displayQuiz.name) return;
+        else prevText = $scope.displayQuiz.name;
 
+        // strip illegal chars
+        $scope.displayQuiz.name = $scope.displayQuiz.name.match(/[a-zA-Z0-9\s\+\,\(\)\:]+/g).join('')
+
+        $scope.quiz.name = $scope.displayQuiz.name;
         $scope.quiz.$update({id: $scope.quiz.id});
-      }, 1000));
+      }, 200));
     }
 
     function updatePublished() {
