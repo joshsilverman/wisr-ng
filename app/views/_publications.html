@@ -1,4 +1,29 @@
-<ul class="timeline">
+<ul class="timeline" data-gradient="rgb(52, 39, 85)">
+  <div 
+    class="title content"
+    ng-show="currentAsker">
+
+    <h2 ng-show='$parent.lesson'>
+      <a ng-href="/{{$parent.currentAsker.subject_url}}">{{$parent.currentAsker.subject}}</a>
+    </h2>
+
+    <h2 ng-show="$parent.questImage">
+      <span>{{$parent.title}}</span>
+
+      <div
+        ng-hide='$parent.lesson'
+        class='feed-selection'>
+        <a
+          ng-class="{'active-feed': !isNewFeed}"
+          ng-href="/{{$parent.currentAsker.subject_url}}">Recent</a>
+        /
+        <a
+          ng-class="{'active-feed': isNewFeed}"
+          ng-href="/{{$parent.currentAsker.subject_url}}/new">Suggested</a>
+      </div>
+    </h2>
+  </div>
+
   <li
     ng-repeat='publication in publications'
     class="feed-publication"
