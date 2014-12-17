@@ -17,6 +17,11 @@ angular.module('wisrNgApp')
         scope.bgColor,
         ' 100%);',
         '}',
+        'ul.timeline:after{',
+        'background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, ',
+        scope.bgColor,
+        ' 100%);',
+        '}',
         '</style>'].join('');
       $('head').append(style);
     }
