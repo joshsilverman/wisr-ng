@@ -19,9 +19,10 @@ angular
     'config',
     'infinite-scroll',
     'angularMoment',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'doowb.angular-pusher'
   ])
-  .config(function ($routeProvider, $locationProvider, $httpProvider) {
+  .config(function ($routeProvider, $locationProvider, $httpProvider, PusherServiceProvider) {
     $locationProvider.html5Mode(true);
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.defaults.withCredentials = true;
@@ -66,4 +67,8 @@ angular
         templateUrl: '/views/feed.html',
         controller: 'FeedCtrl'
       });
+
+    PusherServiceProvider
+      .setToken('95a6d252b4fb7089dd2a')
+      .setOptions({});
   });
