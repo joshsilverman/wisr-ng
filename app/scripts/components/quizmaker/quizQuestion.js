@@ -153,8 +153,8 @@ angular.module('wisrNgApp')
       }, debounceLimit));
     }
 
-    return {
-      templateUrl: '/scripts/components/quizmaker/_new_question.html',
+    return { //quizQuestion
+      templateUrl: '/scripts/components/quizmaker/quizQuestion.html',
       restrict: 'E',
       scope: {
         question: '=',

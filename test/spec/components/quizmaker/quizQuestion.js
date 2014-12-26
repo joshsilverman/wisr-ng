@@ -43,7 +43,7 @@ describe('Directive: quizQuestion', function () {
 
   // load the directive's module
   beforeEach(module('wisrNgApp'));
-  beforeEach(module('/scripts/components/quizmaker/_new_question.html'));
+  beforeEach(module('/scripts/components/quizmaker/quizQuestion.html'));
 
   beforeEach(inject(function ($rootScope, $httpBackend) {
     scope = $rootScope.$new();
@@ -81,7 +81,7 @@ describe('Directive: quizQuestion#addAnswer', function () {
 
   // load the directive's module
   beforeEach(module('wisrNgApp'));
-  beforeEach(module('/scripts/components/quizmaker/_new_question.html'));
+  beforeEach(module('/scripts/components/quizmaker/quizQuestion.html'));
 
   beforeEach(inject(function ($rootScope, $compile, $httpBackend) {
     scope = $rootScope.$new();
