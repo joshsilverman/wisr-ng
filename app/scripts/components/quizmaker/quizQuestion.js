@@ -68,15 +68,13 @@ angular.module('wisrNgApp')
       if (scope.question) return;
 
       scope.question = new QuestionRsrc(scope.lessonItem['_question']);
-      scope.displayQuestion = {text: scope.question.text};
 
       // @strange that this had to go on the scope and could
       // not be put in this context and pulled in via the closure
       scope.prevQuestionText = scope.question.text;
-      scope.$watch('displayQuestion.text', _.debounce(function() {
+      scope.$watch('question.text', function() {
         if (!scope.question.id) return;
 
-        scope.question.text = scope.displayQuestion.text;
         if (scope.prevQuestionText == scope.question.text) return;
         else scope.prevQuestionText = scope.question.text;
 
@@ -85,7 +83,7 @@ angular.module('wisrNgApp')
         scope.question.$update({id: scope.question.id}).then(function() {
           scope.saving = false;
         });
-      }, debounceLimit));
+      });
     }
 
     function assignCorrectAnswer(scope) {
@@ -98,12 +96,10 @@ angular.module('wisrNgApp')
           id: scope.correctAnswerId,
           text: scope.lessonItem['_answers'][scope.correctAnswerId]
         });
-        scope.displayCorrectAnswer = {text: scope.correctAnswer.text};
       }
 
       scope.prevCorrectAnswerText = scope.correctAnswer.text;
-      scope.$watch('displayCorrectAnswer.text', _.debounce(function() {
-        scope.correctAnswer.text = scope.displayCorrectAnswer.text;
+      scope.$watch('correctAnswer.text', function() {
         if (scope.prevCorrectAnswerText == scope.correctAnswer.text) return;
         else scope.prevCorrectAnswerText = scope.correctAnswer.text;
 
@@ -111,13 +107,12 @@ angular.module('wisrNgApp')
         scope.correctAnswer.$update({id: scope.correctAnswer.id}).then(function() {
           scope.saving = false;
         });
-      }, debounceLimit));
+      });
     }
 
     function assignIncorrectAnswers(scope) {
       if (scope.incorrectAnswers) return; // assign once
       scope.incorrectAnswers = [];
-      scope.displayIncorrectAnswers = [];
       _.each(scope.lessonItem['_answers'], function(questionText, id) {
         if (id == scope.correctAnswerId) return;
         var answer = new AnswerRsrc({
@@ -131,18 +126,13 @@ angular.module('wisrNgApp')
     function listenToIncorrectAnswerChange(answer, scope) {
       var k = scope.incorrectAnswers.length;
       scope.incorrectAnswers.push(answer);
-      scope.displayIncorrectAnswers.push({
-        id: answer.id,
-        text: answer.text
-      });
 
       scope.prevIncorrectAnswerText = scope.prevIncorrectAnswerText || {};
       scope.prevIncorrectAnswerText[k] = answer.text;
-      var watchExp = ['displayIncorrectAnswers[', k , '].text'].join('');
-      scope.$watch(watchExp, _.debounce(function() {
+      var watchExp = ['incorrectAnswers[', k , '].text'].join('');
+      scope.$watch(watchExp, function() {
         if (!answer.id) return;
 
-        answer.text = scope.displayIncorrectAnswers[k].text;
         if (scope.prevIncorrectAnswerText[k] == answer.text) return;
         else scope.prevIncorrectAnswerText[k] = answer.text;
 
@@ -150,7 +140,7 @@ angular.module('wisrNgApp')
         answer.$update({id: answer.id}).then(function() {
           scope.saving = false;
         });
-      }, debounceLimit));
+      });
     }
 
     return { //quizQuestion

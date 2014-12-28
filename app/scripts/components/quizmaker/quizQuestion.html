@@ -1,41 +1,52 @@
 <div class="content">
-  <h3>
-    <span>
-      <input
-        ng-model='displayQuestion.text' 
-        placeholder='Suggest a followup question' />
-    </span>
-  </h3>
-
-  <div class="answers">
-    <div class="answer correct">
-      <span>
-        <input ng-model='displayCorrectAnswer.text' placeholder='Correct answer' />
-      </span>
-    </div>
-    <div
-      ng-repeat="incorrectAnswer in displayIncorrectAnswers"
-      class="answer incorrect"
-      ng-show="incorrectAnswer.id">
-
+  <form name='questionForm'>
+    <h3>
       <span>
         <input
-          ng-change='updateAnswers()'
-          placeholder='Incorrect answer'
-          ng-model='incorrectAnswer.text' />
-        <span 
-          class='delete-answer'
-          ng-click='deleteAnswer(incorrectAnswer.id)'>&#10006;</span>
+          name='questionText'
+          ng-model='question.text'
+          ng-model-options="{ updateOn: 'blur' }"
+          ng-keyup="cancel($event)"
+          placeholder='Question text' />
       </span>
-    </div>
-    <div 
-      class='answer incorrect add-answer' 
-      ng-click='addAnswer(question.id)'
-      ng-hide='incorrectAnswers.length > 2'>
+    </h3>
 
-      Add another answer
+    <div class="answers">
+      <div class="answer correct">
+        <span>
+          <input 
+            ng-model='correctAnswer.text' 
+            placeholder='Correct answer'
+            ng-model-options="{ updateOn: 'blur' }"
+            ng-keyup="cancel($event)" />
+        </span>
+      </div>
+      <div
+        ng-repeat="incorrectAnswer in incorrectAnswers"
+        class="answer incorrect"
+        ng-show="incorrectAnswer.id">
+
+        <span>
+          <input
+            ng-change='updateAnswers()'
+            placeholder='Incorrect answer'
+            ng-model='incorrectAnswer.text'
+            ng-model-options="{ updateOn: 'blur' }"
+            ng-keyup="cancel($event)" />
+          <span 
+            class='delete-answer'
+            ng-click='deleteAnswer(incorrectAnswer.id)'>&#10006;</span>
+        </span>
+      </div>
+      <div 
+        class='answer incorrect add-answer' 
+        ng-click='addAnswer(question.id)'
+        ng-hide='incorrectAnswers.length > 2'>
+
+        Add another answer
+      </div>
     </div>
-  </div>
+  </form>
 </div>
 
 <div class='meta-info meta-info-present'>
