@@ -36,17 +36,17 @@ angular.module('wisrNgApp')
         "answer_id" : $scope.answer.id};
 
       $scope.grading = true;
-      RespondToQuestionRsrc.save('/respond_to_question', params).
+      RespondToQuestionRsrc.respond(params).
         $promise.then(function(data) {
           $scope.grading = false;
 
-          if (data[0] == 'f') {
-            $scope.correct = false;
-            $scope.$emit('AnswerCtrl:incorrect');
-          }
-          else {
+          if (data.correct) {
             $scope.correct = true;
             $scope.$emit('AnswerCtrl:correct');
+          }
+          else {
+            $scope.correct = false;
+            $scope.$emit('AnswerCtrl:incorrect');
           }
         });
     };
