@@ -14,8 +14,16 @@ angular.module('wisrNgApp')
     function init(scope, element, attrs) {
       $scope = scope;
 
-      console.log(scope.asker);
       loadLessonCounts();
+
+      $scope.navToLesson = function(lesson) {
+        var url = [
+          $scope.subject_url,
+          "quiz",
+          lesson.id
+          ].join("/");
+        return url;
+      }
     }
 
     function loadLessonCounts() {
@@ -28,7 +36,7 @@ angular.module('wisrNgApp')
     }
 
     return {
-      templateUrl: '/views/_lessons.html',
+      templateUrl: '/scripts/components/lessonslist/lessonslist.html',
       restrict: 'E',
       scope: {
         asker: '=',
