@@ -1,19 +1,16 @@
-<div class="lessons visible">
-  <h4>Quizzes</h4>
+<h4>Quizzes</h4>
 
-  <ul>
-    <li class='appear' ng-repeat='lesson in lessons'>
-      <div class='content' ng-click='navToLesson(subject_url, lesson.topic_url)'>
-        <span>{{$index + 1}}</span>
+<ul>
+  <li class='appear' ng-repeat='lesson in lessons'>
+    <div class='content' ng-click='navToLesson(subject_url, lesson.topic_url)'>
+      <span>{{$index + 1}}</span>
 
-        <span class='completeness'>
-          <span>{{lessonCounts[lesson.id]}}</span>
-          <span ng-show='lessonCounts[lesson.id]'> / </span>
-          <span>{{lesson._question_count}}</span>
-        </span>
+      <span class='completeness'>
+        <span>{{lessonCounts[lesson.id]}}</span>
+        <span ng-show='lessonCounts[lesson.id]'> / </span>
+        <span>{{lesson._question_count}}</span>
+      </span>
 
-        <p>{{lesson.name}}</p>
-      </div>
-    </li>
-  </ul>
-</div>
+      <p>{{lesson.name}}</p>
+    </div>
+  </li>
