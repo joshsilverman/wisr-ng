@@ -10,7 +10,7 @@
       ng-click="updatePublished()">
         <span ng-switch="quiz.published">
           <span ng-switch-when="true">Unpublish</span>
-          <span ng-switch-when="false">Publish</span>
+          <span ng-switch-default>Publish</span>
         </span>
       </button>
   </div>
