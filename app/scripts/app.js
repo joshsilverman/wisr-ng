@@ -58,7 +58,7 @@ angular
         controller: 'QuizmakerCtrl',
         params: {'new': true}
       })
-      .when('/:subjectURL/quiz/:id', {
+      .when('/:subjectURL/:id/quiz/edit', {
         templateUrl: '/scripts/components/quizmaker/quizmakerCtrl.html',
         controller: 'QuizmakerCtrl',
         params: {edit: true}
