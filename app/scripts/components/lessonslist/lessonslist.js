@@ -17,11 +17,23 @@ angular.module('wisrNgApp')
       loadLessonCounts();
 
       $scope.navToLesson = function(lesson) {
-        var url = [
-          $scope.subject_url,
-          "quiz",
-          lesson.id
-          ].join("/");
+        var url;
+
+        if ($scope.editMode()) {
+          url = [
+            $scope.subject_url,
+            lesson.id,
+            "quiz",
+            "edit",
+            ].join("/");
+        } else {
+          url = [
+            $scope.subject_url,
+            lesson.topic_url,
+            'quiz'
+          ].join('/');
+        }
+
         return url;
       }
     }
@@ -40,7 +52,7 @@ angular.module('wisrNgApp')
       restrict: 'E',
       scope: {
         asker: '=',
-        showCounts: '='
+        editMode: '&'
       },
       link: function postLink(scope, element, attrs) {
         var linkArgs = arguments;
