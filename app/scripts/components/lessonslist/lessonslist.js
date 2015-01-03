@@ -39,12 +39,12 @@ angular.module('wisrNgApp')
     }
 
     function loadLessonCounts() {
+      if (!$scope.asker) return;
+
       LessonsRsrc.get({asker_id: $scope.asker.id}, function(data) {
         $scope.lessons = data.topics;
         $scope.subject_url = data.meta.subject_url;
       });
-
-      // updateAnsweredCounts();
     }
 
     return {
