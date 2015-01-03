@@ -8,7 +8,7 @@
  */
 
 angular.module('wisrNgApp')
-  .directive('lessonsList', function (LessonsRsrc) {
+  .directive('lessonsList', function (LessonsRsrc, LessonAnswerCountsRsrc) {
     var $scope;
 
     function init(scope, element, attrs) {
@@ -45,6 +45,16 @@ angular.module('wisrNgApp')
         $scope.lessons = data.topics;
         $scope.subject_url = data.meta.subject_url;
       });
+
+      updateAnsweredCounts();
+    }
+
+    function updateAnsweredCounts() {
+      if (!$scope.showAnsweredCounts()) return;
+
+      LessonAnswerCountsRsrc.get({}, function(data) {
+        $scope.lessonCounts = data;
+      });
     }
 
     return {
@@ -52,7 +62,8 @@ angular.module('wisrNgApp')
       restrict: 'E',
       scope: {
         asker: '=',
-        editMode: '&'
+        editMode: '&',
+        showAnsweredCounts: '&'
       },
       link: function postLink(scope, element, attrs) {
         var linkArgs = arguments;
