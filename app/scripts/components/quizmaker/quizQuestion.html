@@ -7,6 +7,7 @@
           ng-model='question.text'
           ng-model-options="{ updateOn: 'blur' }"
           ng-keyup="cancel($event)"
+          ng-disabled='!editMode'
           placeholder='Question text' />
       </span>
     </h3>
@@ -18,6 +19,7 @@
             ng-model='correctAnswer.text' 
             placeholder='Correct answer'
             ng-model-options="{ updateOn: 'blur' }"
+            ng-disabled='!editMode'
             ng-keyup="cancel($event)" />
         </span>
       </div>
@@ -31,6 +33,7 @@
             ng-change='updateAnswers()'
             placeholder='Incorrect answer'
             ng-model='incorrectAnswer.text'
+            ng-disabled='!editMode'
             ng-model-options="{ updateOn: 'blur' }"
             ng-keyup="cancel($event)" />
           <span 
@@ -51,7 +54,10 @@
 
 <div class='meta-info meta-info-present'>
   <div class='byline'>
-    <a ng-click='deleteQuestion()'>
+    <a
+      ng-if='editMode' 
+      ng-click='deleteQuestion()'>
+
       Remove
     </a>
     <em class='status' ng-show='saving'>saving</em>

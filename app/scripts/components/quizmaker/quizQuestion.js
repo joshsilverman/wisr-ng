@@ -150,14 +150,17 @@ angular.module('wisrNgApp')
         question: '=',
         lessonItem: '=',
         correctAnswer: '=',
-        incorrectAnswers: '='
+        incorrectAnswers: '=',
+        editMode: '='
       },
       link: function(_scope, element, attrs) {
-        _scope.$watch('lessonItem', function() {
-          link(_scope, element, attrs);          
-        });
+        var linkArgs = arguments;
 
-        link(_scope, element, attrs);
+        _.each(['lessonItem', 'editMode'], function(exp) {
+          _scope.$watch(exp, function() {
+            link.apply(this, linkArgs);          
+          });
+        });
       }
     };
   });
