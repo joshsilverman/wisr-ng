@@ -10,7 +10,7 @@ angular.module('wisrNgApp')
   .directive('quizDetailEditor', function (LessonRsrc) {
     var $scope;
 
-    function init(scope, element, attrs) {
+    function link(scope, element, attrs) {
       $scope = scope;
       $scope.updatePublished = updatePublished;
 
@@ -57,7 +57,7 @@ angular.module('wisrNgApp')
         // switch to $watchGroup after upgrade to ng 1.3+
         _.each(['quiz', 'currentAsker', 'editMode'], function(exp) {
           scope.$watch(exp, function() {
-            init.apply(this, linkArgs);          
+            link.apply(this, linkArgs);          
           });
         });
       }
