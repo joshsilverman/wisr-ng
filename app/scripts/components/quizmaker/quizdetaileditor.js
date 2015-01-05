@@ -48,13 +48,14 @@ angular.module('wisrNgApp')
       restrict: 'E',
       scope: {
         quiz: '=',
-        currentAsker: '='
+        currentAsker: '=',
+        editMode: '='
       },
       link: function postLink(scope, element, attrs) {
         var linkArgs = arguments;
 
         // switch to $watchGroup after upgrade to ng 1.3+
-        _.each(['quiz', 'currentAsker'], function(exp) {
+        _.each(['quiz', 'currentAsker', 'editMode'], function(exp) {
           scope.$watch(exp, function() {
             init.apply(this, linkArgs);          
           });

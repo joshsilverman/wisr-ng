@@ -2,10 +2,13 @@
   <h2>Make a quiz for {{currentAsker.subject}}</h2>
   <div class='controls'>
     <input 
+      ng-disabled='!editMode'
       class='quiz-name'
       ng-model='displayQuiz.name'></input>
+
     <button
       class='publish'
+      ng-if='editMode'
       ng-disabled="updatingPublished"
       ng-click="updatePublished()">
         <span ng-switch="quiz.published">
@@ -13,5 +16,12 @@
           <span ng-switch-default>Publish</span>
         </span>
       </button>
+    <span 
+      class='locked'
+      ng-if='!editMode'>
+
+      <img class='lock'></img>
+      Locked for editing
+    </span>
   </div>
 </div>
