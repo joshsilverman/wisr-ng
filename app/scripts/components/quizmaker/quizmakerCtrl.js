@@ -50,6 +50,10 @@ angular.module('wisrNgApp')
     function loadQuizData(lessonItems) {
       $scope.quiz = new LessonRsrc(lessonItems[0]._lesson);
       $scope.lessonItems = lessonItems;
+
+      if ($scope.currentUser.id == lessonItems[0]._lesson.user_id) {
+        $scope.editMode = true;
+      }
     }
 
     $scope.addQuestion = function() {
