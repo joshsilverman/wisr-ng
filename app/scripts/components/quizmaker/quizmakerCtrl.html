@@ -43,7 +43,10 @@
         </quiz-question>
       </li>
 
-      <div class="content new-question">
+      <div 
+        ng-if='editMode'
+        class="content new-question">
+
         <a ng-click='addQuestion()'>
           New Question
         </a>
