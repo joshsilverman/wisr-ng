@@ -42,7 +42,7 @@ angular.module('wisrNgApp')
     }
 
     function navToQuiz(quiz) {
-      var url = ['', $scope.currentAsker.subject_url, 'quiz', quiz.id].join('/');
+      var url = ['', $scope.currentAsker.subject_url, quiz.id, 'quiz', 'edit'].join('/');
       $scope.quiz = quiz;
       $location.path(url).replace();
     }
