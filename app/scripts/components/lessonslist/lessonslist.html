@@ -21,7 +21,15 @@
           <span>{{lesson._question_count}}</span>
         </span>
 
-        <p>{{lesson.name}}</p>
+        <p>
+          {{lesson.name}}
+          <span 
+            ng-if="lesson.user_id == currentUser.id"
+            class="label label-info">
+
+            My Quiz
+          </span>
+        </p>
       </a>
     </li>
   </ul>

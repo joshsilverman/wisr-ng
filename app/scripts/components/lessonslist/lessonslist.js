@@ -63,7 +63,8 @@ angular.module('wisrNgApp')
       scope: {
         asker: '=',
         editMode: '&',
-        showAnsweredCounts: '&'
+        showAnsweredCounts: '&',
+        currentUser: '='
       },
       link: function postLink(scope, element, attrs) {
         var linkArgs = arguments;
