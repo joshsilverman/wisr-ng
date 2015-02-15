@@ -57,7 +57,7 @@ angular.module('wisrNgApp')
         // switch to $watchGroup after upgrade to ng 1.3+
         _.each(['quiz', 'currentAsker', 'editMode'], function(exp) {
           scope.$watch(exp, function() {
-            link.apply(this, linkArgs);          
+            link.apply(this, linkArgs);
           });
         });
       }

@@ -7,7 +7,8 @@
   <ul>
     <li
       class='appear'
-      ng-repeat='lesson in lessons'>
+      ng-repeat='lesson in lessons'
+      ng-if="shouldShowLesson(lesson)">
 
       <a
         ng-href='/{{navToLesson(lesson)}}'

@@ -36,6 +36,12 @@ angular.module('wisrNgApp')
 
         return url;
       }
+
+      $scope.shouldShowLesson = function(lesson) {
+        return (   lesson.user_id == null
+                || ($scope.currentUser && lesson.user_id == $scope.currentUser.id)
+                || lesson.published);
+      }
     }
 
     function loadLessonCounts() {
@@ -70,7 +76,7 @@ angular.module('wisrNgApp')
         var linkArgs = arguments;
 
         scope.$watch('asker', function() {
-          init.apply(this, linkArgs);          
+          init.apply(this, linkArgs);
         });
       }
     };
