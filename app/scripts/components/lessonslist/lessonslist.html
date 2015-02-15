@@ -1,15 +1,15 @@
-<div 
+<div
   class="lessons"
   ng-class="{visible: lessons.length}">
 
   <h4>{{asker.subject}} Quizzes</h4>
 
   <ul>
-    <li 
-      class='appear' 
+    <li
+      class='appear'
       ng-repeat='lesson in lessons'>
 
-      <a 
+      <a
         ng-href='/{{navToLesson(lesson)}}'
         class='content'>
 
@@ -23,8 +23,8 @@
 
         <p>
           {{lesson.name}}
-          <span 
-            ng-if="lesson.user_id == currentUser.id"
+          <span
+            ng-if="lesson.user_id == currentUser.id && currentUser.id"
             class="label label-info">
 
             My Quiz
