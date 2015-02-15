@@ -1,9 +1,10 @@
 <div
   ng-if="web"
   class="header"
-  style="background: {{$parent.silhouetteColor}};"
-  ng-controller='HeaderCtrl'
-  ng-include="'views/shared/_header.html'"></div>
+  style="background: {{$parent.silhouetteColor}};">
+
+  <header></header>
+</div>
 
 <div ng-if="web" wsr-stellar class="starscape">
   <div class="galaxy" data-stellar-ratio=".32"></div>

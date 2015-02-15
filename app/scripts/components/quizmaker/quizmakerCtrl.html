@@ -1,8 +1,9 @@
 <div
   class="header"
-  style="background: {{silhouetteColor}};"
-  ng-controller='HeaderCtrl'
-  ng-include="'/views/shared/_header.html'"></div>
+  style="background: {{silhouetteColor}};">
+
+  <header></header>
+</div>
 
   <wsr-silhouette currentAsker="currentAsker"></wsr-silhouette>
 
@@ -11,12 +12,12 @@
   ng-controller='PublicationsCtrl'>
 
   <div class="timeline-container">
-    <ul 
-      class="timeline" 
+    <ul
+      class="timeline"
       timeline-gradient
       bg-color="bgColor">
 
-      <quiz-detail-editor 
+      <quiz-detail-editor
         class="quiz-detail-editor"
         quiz="quiz"
         current-asker="currentAsker"
@@ -43,7 +44,7 @@
         </quiz-question>
       </li>
 
-      <div 
+      <div
         ng-if='editMode'
         class="content new-question">
 
@@ -56,7 +57,7 @@
 
   <div class='right-column'>
 
-    <lessons-list 
+    <lessons-list
       asker='currentAsker'
       current-user='currentUser'
       edit-mode='true'>

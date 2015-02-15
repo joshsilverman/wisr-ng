@@ -1,9 +1,10 @@
 <div
   ng-if="web"
   class="header"
-  style="background: {{$parent.silhouetteColor}};"
-  ng-controller='HeaderCtrl'
-  ng-include="'/views/shared/_header.html'"></div>
+  style="background: {{$parent.silhouetteColor}};">
+
+  <header></header>
+</div>
 
 <wsr-silhouette currentAsker="currentAsker"></wsr-silhouette>
 
@@ -26,7 +27,7 @@
       ng-include="'/views/_stream.html'"
       class="activity-stream"></div>
 
-    <lessons-list 
+    <lessons-list
       asker='currentAsker'
       show-answered-counts='true'>
     </lessons-list>
