@@ -18,6 +18,14 @@
 </a>
 
 <div
+  class="create-quiz"
+  ng-show="askerSubjectUrl && authenticated">
+  <a ng-href='/{{askerSubjectUrl}}/quiz/new'>
+    Create a Quiz
+  </a>
+</div>
+
+<div
   class="sign-in"
   ng-show='!authenticated'>
 
